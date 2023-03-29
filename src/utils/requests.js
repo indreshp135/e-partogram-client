@@ -46,7 +46,12 @@ export const logoutRequest = () => axios.get(LOGOUT_URL, requestConfig);
 
 export const userRequest = ({
   token
-}) => axios.get(USER_URL, { token }, requestConfig);
+}) => axios.get(USER_URL, {
+  ...requestConfig,
+  headers: {
+    'X-Token-Firebase': token
+  }
+});
 
 // roles
 export const getRolesRequest = () => axios.get(`${GET_ROLES_URL}`, requestConfig);

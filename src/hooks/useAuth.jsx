@@ -22,12 +22,13 @@ export function AuthProvider({ children }) {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
       const token = await userCredential.user.getIdToken();
-      const response = await request(() => userRequest(token));
+      const response = await request(() => userRequest({ token }));
       if (response.status === 200) {
         setUser(response.data);
         notifications.show({
           title: 'Login successful'
         });
+        navigate('/home');
         // navigate(navLinks.filter((link) => link.label === response.data.tabs[0])[0].link);
       } else {
         notifications.show({
