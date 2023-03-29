@@ -7,6 +7,7 @@ import { LandingPageContainer } from '../containers/LandingPageContainer';
 import { Homepage } from '../components/Home';
 import { PatientData } from '../components/PatientAdmission';
 import { CronForm } from '../components/CronForms';
+import { CanvasChart } from '../components/Chart';
 
 export const publicRoutes = [
   {
@@ -36,6 +37,12 @@ export const publicRoutes = [
     component: <GeneralPageContainer child={<CronForm />} />,
     name: 'CronFormPageContainer',
     label: 'regular-update'
+  },
+  {
+    url: '/patient-history',
+    component: <GeneralPageContainer child={<CanvasChart />} />,
+    name: 'PatientHistoryPageContainer',
+    label: 'patient-history'
   }
 ];
 
