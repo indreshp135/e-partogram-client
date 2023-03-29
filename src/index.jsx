@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { MantineProvider, ColorSchemeProvider } from '@mantine/core';
-import { NotificationsProvider } from '@mantine/notifications';
 import { Routers } from './routes';
 import theme from './utils/theme';
 import * as serviceWorker from './serviceWorker';
@@ -19,11 +18,9 @@ function App() {
           colorScheme, ...theme
         }}
       >
-        <NotificationsProvider>
-          <LoadingProvider>
-            <Routers />
-          </LoadingProvider>
-        </NotificationsProvider>
+        <LoadingProvider>
+          <Routers />
+        </LoadingProvider>
       </MantineProvider>
     </ColorSchemeProvider>
   );

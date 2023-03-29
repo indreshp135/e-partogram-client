@@ -16,14 +16,15 @@ export const publicRoutes = [
     url: '/',
     component: <LandingPageContainer />,
     name: 'LandingPageContainer'
-  }
-];
-
-export const privateRoutes = [
+  },
   {
     url: '/home',
     component: <GeneralPageContainer child={<Homepage />} />,
     name: 'HomePageContainer',
     label: 'home'
   }
+];
+
+export const privateRoutes = [
+
 ];

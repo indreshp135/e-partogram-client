@@ -85,19 +85,13 @@ export function TopLanding() {
         <div className={classes.inner}>
           <div className={classes.content}>
             <Title className={classes.title}>
-              Transforming paper-based
+              Empowering Safe Deliveries with
               {' '}
-              <span className={classes.highlight}>Patrograms</span>
-              {' '}
-              into digital
-              solutions.
+              <span className={classes.highlight}>E-Partogram</span>
             </Title>
             <Text color="dimmed" mt="md">
-              E-Patrogram is a digital solution that streamlines Patrogram
-              management, simplifying administrative tasks, and ensuring
-              accountability. It provides real-time data analysis, incident
-              reporting, and communication tools, promoting safety and security
-              for communities and organizations.
+              Experience the Future of Maternal Care with E-Partogram - the
+              Digital Solution for Better Birth Outcomes.
             </Text>
             <Group mt={30}>
               <Button

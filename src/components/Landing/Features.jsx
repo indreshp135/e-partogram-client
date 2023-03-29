@@ -8,40 +8,34 @@ import {
   createStyles
 } from '@mantine/core';
 import {
-  IconCertificate, IconVaccine, IconInfoCircle, IconReportAnalytics, IconDeviceMobileMessage
+  IconReportAnalytics, IconDeviceMobileMessage, IconCalculatorOff, IconEye
 } from '@tabler/icons';
 import PropTypes from 'prop-types';
 
 export const FEATURES = [
   {
     icon: IconReportAnalytics,
-    title: 'Real-time Data Analysis',
+    title: 'Real-Time Data Visualization',
     description:
-        'E-Patrogram allows users to analyze real-time data on patrols, incidents, and responses, enabling quick decision-making and resource allocation.'
+        'E-Partogram allows doctors and nurses to monitor and visualize maternal and fetal data in real-time, ensuring prompt interventions when needed.'
   },
   {
-    icon: IconInfoCircle,
-    title: 'Incident Reporting',
+    icon: IconCalculatorOff,
+    title: 'Automated Calculations',
     description:
-        'The system provides a simple and efficient way to report incidents, including location, details, and multimedia evidence, ensuring accurate documentation for future reference.'
+        'With E-Partogram, all necessary calculations such as cervical dilatation, fetal heart rate, and uterine contractions are done automatically, reducing the risk of errors and saving time.'
   },
   {
-    icon: IconVaccine,
-    title: 'Accountability',
+    icon: IconEye,
+    title: 'Decision Support System',
     description:
-        'The solution ensures accountability by tracking patrol activities, incidents, and responses, providing transparency and visibility into patrol operations.'
+        'The software provides alerts and prompts for healthcare providers based on predefined thresholds, reducing the risk of adverse outcomes.'
   },
   {
     icon: IconDeviceMobileMessage,
     title: 'Mobile App',
     description:
-        'The mobile app enables patrollers to receive real-time assignments, report incidents, and access critical information on-the-go, increasing efficiency and flexibility.'
-  },
-  {
-    icon: IconCertificate,
-    title: 'Customizable Reports',
-    description:
-      ' E-Patrogram allows administrators to generate customized reports on patrol activities, incidents, and responses, providing valuable insights and facilitating data-driven decision-making.'
+        'The mobile app enable to receive real-time assignments, report incidents, and access critical information on-the-go, increasing efficiency and flexibility.'
   }
 ];
 
@@ -68,7 +62,7 @@ Feature.propTypes = {
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
-    paddingBottom: theme.spacing.xl * 4
+    paddingBottom: 40
   },
 
   title: {
@@ -98,21 +92,10 @@ export function FeaturesGrid() {
 
   return (
     <Container className={classes.wrapper}>
-      {/* <Title className={classes.title}>
-
-        Integrate effortlessly with any technology stack
-      </Title> */}
-
-      {/* <Container size={560} p={0}>
-        <Text size="sm" className={classes.description}>
-          Every once in a while, you’ll see a Golbat that’s missing some fangs.
-          This happens when hunger drives it to try biting a Steel-type Pokémon.
-        </Text>
-      </Container> */}
 
       <SimpleGrid
         mt={60}
-        cols={3}
+        cols={2}
         spacing={theme.spacing.xl * 2}
         breakpoints={[
           { maxWidth: 980, cols: 2, spacing: 'xl' },

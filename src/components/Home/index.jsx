@@ -1,9 +1,12 @@
 import React from 'react';
 import {
-  createStyles, Title, Center
+  createStyles, Container, Paper,
+  Title, Center
 } from '@mantine/core';
 import '@lottiefiles/lottie-player';
-import { useAuth } from '../../hooks/useAuth';
+import { StatsControls } from './Stats';
+import { PatientTable } from './PatientTable';
+// import { useAuth } from '../../hooks/useAuth';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -47,28 +50,22 @@ const useStyles = createStyles((theme) => ({
 export function Homepage() {
   const { classes } = useStyles();
 
-  const { user } = useAuth();
+  // const { user } = useAuth();
 
   return (
     <div className={classes.root}>
+      <Container>
+        <StatsControls />
+        <Center mt={40}>
+          <Title className={classes.title} order={3}>
+            Patients Details
+          </Title>
+        </Center>
+        <Paper m={10}>
 
-      <Title className={classes.title} order={4}>
-        Welcome,
-        {' '}
-        {user.name}
-        !
-      </Title>
-
-      <Center>
-        <div className={classes.animation}>
-          <lottie-player
-            autoplay
-            loop
-            mode="normal"
-            src="https://assets8.lottiefiles.com/packages/lf20_pj4rwxci.json"
-          />
-        </div>
-      </Center>
+          <PatientTable />
+        </Paper>
+      </Container>
 
     </div>
   );

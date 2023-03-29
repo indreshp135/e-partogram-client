@@ -15,7 +15,7 @@ import {
   Center,
   PasswordInput
 } from '@mantine/core';
-import { showNotification } from '@mantine/notifications';
+import { notifications } from '@mantine/notifications';
 import { useNavigate } from 'react-router-dom';
 import { getRolesRequest, registerRequest } from '../../utils/requests';
 import { useAuth } from '../../hooks/useAuth';
@@ -57,14 +57,14 @@ export function Auth() {
       if (response.status === 200) {
         setRoles(response.data);
       } else {
-        showNotification({
+        notifications.show({
           color: 'red',
           title: 'Error while fetching data',
           message: response.data.message
         });
       }
     } catch (error) {
-      showNotification({
+      notifications.show({
         color: 'red',
         title: 'Error while fetching data',
         message: error.response.data
@@ -103,7 +103,7 @@ export function Auth() {
       try {
         login(form.values);
       } catch (error) {
-        showNotification({
+        notifications.show({
           color: 'red',
           title: 'Login failed',
           message: error.response.data
@@ -116,19 +116,19 @@ export function Auth() {
           form.values
         ));
         if (response.status === 201) {
-          showNotification({
+          notifications.show({
             type: 'success',
             message: 'Registration successful'
           });
         } else {
-          showNotification({
+          notifications.show({
             color: 'red',
             title: 'Registration failed',
             message: response.data.message
           });
         }
       } catch (error) {
-        showNotification({
+        notifications.show({
           color: 'red',
           title: 'Registration failed',
           message: error.response.data

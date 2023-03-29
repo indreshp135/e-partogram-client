@@ -5,8 +5,8 @@ import {
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
-    paddingTop: theme.spacing.xl * 2,
-    paddingBottom: theme.spacing.xl * 2
+    paddingTop: 20,
+    paddingBottom: 20
   },
 
   title: {
@@ -24,19 +24,19 @@ const useStyles = createStyles((theme) => ({
 
 const FAQ = [
   {
-    question: 'Can E-Patrogram integrate with our existing patrol management system?',
-    answer: 'Yes, E-Patrogram is designed to integrate seamlessly with existing patrol management systems, allowing for a smooth transition to digital patrols.',
+    question: 'What is E-Partogram?',
+    answer: ' E-Partogram is a digital solution that provides healthcare providers with real-time monitoring, automated calculations, decision support, secure data management, and customizable settings for maternal and fetal monitoring during labor.',
     value: 'what'
   },
   {
-    question: 'Is E-Patrogram secure and compliant with data protection regulations?',
-    answer: 'Yes, E-Patrogram is built with security and compliance in mind. The system uses encryption and access controls to protect sensitive data, and is fully compliant with data protection regulations.',
+    question: 'How does E-Partogram work?',
+    answer: 'E-Partogram works by capturing maternal and fetal parameters such as cervical dilation, fetal heart rate, contractions, and more. The software then analyzes this data in real-time, providing alerts and prompts to healthcare providers based on predefined thresholds.',
     value: 'how'
   },
   {
-    question: 'How does E-Patrogram improve patrol efficiency and response times?',
-    answer: 'E-Patrogram improves patrol efficiency and response times by streamlining administrative tasks, providing real-time data analysis and incident reporting, and facilitating communication between patrollers and administrators. This results in faster and more effective response to incidents and emergencies.',
-    value: 'difference'
+    question: 'Who can use E-Partogram?',
+    answer: 'E-Partogram can be used by healthcare providers, such as obstetricians, midwives, and nurses, who are involved in maternal and fetal monitoring during labor.',
+    value: 'who'
   }
 
 ];
