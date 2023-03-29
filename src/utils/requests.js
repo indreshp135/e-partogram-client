@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getToken } from 'firebase/app-check';
 import {
   LOGIN_URL,
   REGISTER_URL,
@@ -6,9 +7,10 @@ import {
   USER_URL,
   GET_ROLES_URL
 } from './urls';
+import { appCheck } from './firebase';
 
-// withCredentials
-const withCredentials = {
+// requestConfig
+const requestConfig = {
   withCredentials: true
 };
 
@@ -19,12 +21,12 @@ export const loginRequest = ({ email, password }) => axios.post(
     email,
     password
   },
-  withCredentials
+  requestConfig
 );
 
 export const registerRequest = ({
   email, name, password, role
-}) => axios.post(
+}) => getToken(appCheck).then((tokenResult) => axios.post(
   REGISTER_URL,
   {
     email,
@@ -32,12 +34,19 @@ export const registerRequest = ({
     name,
     role
   },
-  withCredentials
-);
+  {
+    ...requestConfig,
+    headers: {
+      'X-Firebase-AppCheck': tokenResult.token
+    }
+  }
+));
 
-export const logoutRequest = () => axios.get(LOGOUT_URL, withCredentials);
+export const logoutRequest = () => axios.get(LOGOUT_URL, requestConfig);
 
-export const userRequest = () => axios.get(USER_URL, withCredentials);
+export const userRequest = ({
+  token
+}) => axios.get(USER_URL, { token }, requestConfig);
 
 // roles
-export const getRolesRequest = () => axios.get(`${GET_ROLES_URL}`, withCredentials);
+export const getRolesRequest = () => axios.get(`${GET_ROLES_URL}`, requestConfig);

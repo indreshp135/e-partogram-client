@@ -131,8 +131,8 @@ export function Auth() {
         notifications.show({
           color: 'red',
           title: 'Registration failed',
-          message: error.response.data
-            && error.response.data.message ? error.response.data.message : error.message
+          message: error.message || (error.response.data
+            && error.response.data.message ? error.response.data.message : error.message)
         });
       }
     }
