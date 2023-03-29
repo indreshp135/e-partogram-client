@@ -85,7 +85,7 @@ export function NavBar({ opened, setOpened }) {
     name: 'John Doe',
     email: 'itsme@gmail.com',
     role: 'Nurse',
-    tabs: ['home', 'patients', 'appointments', 'settings']
+    tabs: ['home', 'add-patient', 'regular-update', 'patient-list', 'settings']
   };
 
   useEffect(() => {

@@ -5,6 +5,8 @@ import { AuthPageContainer } from '../containers/AuthPageContainer';
 import { LandingPageContainer } from '../containers/LandingPageContainer';
 
 import { Homepage } from '../components/Home';
+import { PatientData } from '../components/PatientAdmission';
+import { CronForm } from '../components/CronForms';
 
 export const publicRoutes = [
   {
@@ -22,6 +24,18 @@ export const publicRoutes = [
     component: <GeneralPageContainer child={<Homepage />} />,
     name: 'HomePageContainer',
     label: 'home'
+  },
+  {
+    url: '/add-patient',
+    component: <GeneralPageContainer child={<PatientData />} />,
+    name: 'PatientDataPageContainer',
+    label: 'add-patient'
+  },
+  {
+    url: '/regular-update',
+    component: <GeneralPageContainer child={<CronForm />} />,
+    name: 'CronFormPageContainer',
+    label: 'regular-update'
   }
 ];
 
