@@ -17,6 +17,9 @@ import {
   ScrollArea,
   Textarea
 } from '@mantine/core';
+import { notifications } from '@mantine/notifications';
+import { useLoading } from '../../hooks/useLoading';
+import { addPatientRequest, listOnDutyStaffRequest } from '../../utils/requests';
 
 const useStyles = createStyles((theme) => ({
   box: {
@@ -59,17 +62,20 @@ export function PatientData() {
     nurses: []
   });
 
+  const { request } = useLoading();
+
+  const getStaffs = async () => {
+    const response = await request(() => listOnDutyStaffRequest());
+    if (response.status === 200) {
+      setStaffs({
+        doctors: response.data.doctorsOnDuty,
+        nurses: response.data.nursesOnDuty
+      });
+    }
+  };
+
   useEffect(() => {
-    setStaffs({
-      doctors: [
-        'Dr. A',
-        'Dr. B'
-      ],
-      nurses: [
-        'Nurse A',
-        'Nurse B'
-      ]
-    });
+    getStaffs();
   }, []);
 
   const form = useForm({
@@ -82,8 +88,15 @@ export function PatientData() {
     }
   });
 
-  const handleSubmit = () => {
-    console.log(form.values);
+  const handleSubmit = async () => {
+    const response = await request(() => addPatientRequest(form.values));
+    if (response.status === 201) {
+      notifications.show({
+        title: 'Success',
+        message: response.data.message,
+        color: 'teal'
+      });
+    }
   };
 
   return (
@@ -293,19 +306,6 @@ export function PatientData() {
             {active >= 3 ? 'Submit' : 'Next'}
           </Button>
         </Group>
-
-        {/* {chillerFields.length === 0 && (
-          <Text color="dimmed" align="center">
-            No chiller data...
-          </Text>
-        )} */}
-
-        {/* <Container>
-          <Text size="sm" weight={350} mt="md">
-            Form values:
-          </Text>
-          <Code block>{JSON.stringify(form.values, null, 2)}</Code>
-        </Container> */}
       </Stack>
     </Container>
   );

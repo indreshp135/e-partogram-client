@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getToken } from 'firebase/app-check';
+
 import {
   LOGIN_URL,
   REGISTER_URL,
@@ -14,7 +15,15 @@ import {
   LIST_NEARBY_HOSPITALS_URL,
   FCM_TOKEN_URL
 } from './urls';
-import { appCheck } from './firebase';
+import { appCheck, auth } from './firebase';
+
+const getIDToken = async () => {
+  const user = await auth.currentUser;
+  if (user) {
+    return user.getIdToken(true);
+  }
+  return null;
+};
 
 // requestConfig
 const requestConfig = {
@@ -64,7 +73,7 @@ export const userRequest = ({
 export const getRolesRequest = () => axios.get(`${GET_ROLES_URL}`, requestConfig);
 
 // add patient
-export const addPatientRequest = (token, {
+export const addPatientRequest = async ({
   name,
   age,
   parity,
@@ -95,15 +104,15 @@ export const addPatientRequest = (token, {
 }, {
   ...requestConfig,
   headers: {
-    'X-Token-Firebase': token
+    'X-Token-Firebase': await getIDToken()
   }
 });
 
-// get patient list
-export const listPatientsRequest = (token) => axios.get(`${LIST_PATIENTS_URL}`, {
+// get patient list - done
+export const listPatientsRequest = async () => axios.get(`${LIST_PATIENTS_URL}`, {
   ...requestConfig,
   headers: {
-    'X-Token-Firebase': token
+    'X-Token-Firebase': await getIDToken()
   }
 });
 
@@ -115,15 +124,15 @@ export const getNearbyHospitalsRequest = (token) => axios.get(`${LIST_NEARBY_HOS
 });
 
 // get patient
-export const getPatientRequest = (token, id) => axios.get(`${GET_PATIENT_URL}/${id}`, {
+export const getPatientRequest = async (id) => axios.get(`${GET_PATIENT_URL}/${id}`, {
   ...requestConfig,
   headers: {
-    'X-Token-Firebase': token
+    'X-Token-Firebase': await getIDToken()
   }
 });
 
-// add measurement
-export const addMeasurementRequest = (token, {
+// add measurement - done
+export const addMeasurementRequest = async ({
   patientId,
   measurementType,
   measurementValue
@@ -134,16 +143,31 @@ export const addMeasurementRequest = (token, {
 }, {
   ...requestConfig,
   headers: {
-    'X-Token-Firebase': token
+    'X-Token-Firebase': await getIDToken()
   }
 });
 
-// list on onduty staff
-export const listOnDutyStaffRequest = (token) => axios.get(`${LIST_ONDUTY_STAFF_URL}`, {
-  ...requestConfig,
-  headers: {
-    'X-Token-Firebase': token
-  }
+// list on onduty staff - done
+export const listOnDutyStaffRequest = async () => {
+  const token = await getIDToken();
+  return axios.get(`${LIST_ONDUTY_STAFF_URL}`, {
+    ...requestConfig,
+    headers: {
+      'X-Token-Firebase': token
+    }
+  });
+};
+
+// List of all Staffs not part of this hospital
+export const getAllStaffRequest = async () => ({
+  data: [
+    {
+      email: 'indr@a.c',
+      role: 'Nurse',
+      id: 'id'
+    }
+  ],
+  status: 200
 });
 
 // fcm token

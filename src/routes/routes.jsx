@@ -9,6 +9,7 @@ import { PatientData } from '../components/PatientAdmission';
 import { CronForm } from '../components/CronForms';
 import { CanvasChart } from '../components/Chart';
 import { NearByHospitals } from '../components/NearByHospitals';
+import { AddStaff } from '../components/AddStaff';
 
 export const publicRoutes = [
   {
@@ -20,7 +21,10 @@ export const publicRoutes = [
     url: '/',
     component: <LandingPageContainer />,
     name: 'LandingPageContainer'
-  },
+  }
+];
+
+export const privateRoutes = [
   {
     url: '/home',
     component: <GeneralPageContainer child={<Homepage />} />,
@@ -34,10 +38,10 @@ export const publicRoutes = [
     label: 'add-patient'
   },
   {
-    url: '/regular-update',
+    url: '/add-measurement/:id',
     component: <GeneralPageContainer child={<CronForm />} />,
     name: 'CronFormPageContainer',
-    label: 'regular-update'
+    label: 'add-measurement'
   },
   {
     url: '/patient-history',
@@ -50,9 +54,11 @@ export const publicRoutes = [
     component: <GeneralPageContainer child={<NearByHospitals />} />,
     name: 'NearByHospitalPageContainer',
     label: 'near-by-hospital'
+  },
+  {
+    url: '/add-staff',
+    component: <GeneralPageContainer child={<AddStaff />} />,
+    name: 'AddStaffContainer',
+    label: 'add-staff'
   }
-];
-
-export const privateRoutes = [
-
 ];

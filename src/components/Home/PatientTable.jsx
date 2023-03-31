@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  createStyles, Table, ScrollArea, rem, Anchor
+  createStyles, Table, ScrollArea, rem, Text
 } from '@mantine/core';
+import { Link } from 'react-router-dom';
+import { useLoading } from '../../hooks/useLoading';
+import { listPatientsRequest } from '../../utils/requests';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -30,82 +33,35 @@ const useStyles = createStyles((theme) => ({
 export function PatientTable() {
   const { classes, cx } = useStyles();
   const [scrolled, setScrolled] = useState(false);
+  const [data, setData] = useState([]);
 
-  const data = [
-    {
-      patientId: '1',
-      name: 'John Doe',
-      status: 'Monitored'
-    },
-    {
-      patientId: '2',
-      name: 'Jane Doe',
-      status: 'Critical'
-    },
-    {
-      patientId: '1',
-      name: 'John Doe',
-      status: 'Critical'
-    },
-    {
-      patientId: '2',
-      name: 'Jane Doe',
-      status: 'Normal'
-    },
-    {
-      patientId: '1',
-      name: 'John Doe',
-      status: 'Critical'
-    },
-    {
-      patientId: '2',
-      name: 'Jane Doe',
-      status: 'Normal'
-    },
-    {
-      patientId: '1',
-      name: 'John Doe',
-      status: 'Monitored'
-    },
-    {
-      patientId: '2',
-      name: 'Jane Doe',
-      status: 'Monitored'
-    },
-    {
-      patientId: '1',
-      name: 'John Doe',
-      status: 'Monitored'
-    },
-    {
-      patientId: '2',
-      name: 'Jane Doe',
-      status: 'Monitored'
-    },
-    {
-      patientId: '1',
-      name: 'John Doe',
-      status: 'Monitored'
-    },
-    {
-      patientId: '2',
-      name: 'Jane Doe',
-      status: 'Normal'
+  const { request } = useLoading();
+
+  const getPatients = async () => {
+    const response = await request(() => listPatientsRequest());
+    if (response.status === 200) {
+      setData(response.data);
     }
-  ];
+  };
+
+  useEffect(() => {
+    getPatients();
+  }, []);
 
   const rows = data.map((row, idx) => (
     <tr key={`row-${idx * 2}`}>
       <td>{idx + 1}</td>
       <td>
-        <Anchor
-          href={`/patient/${row.patientId}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          color="blue"
+        <Link
+          href={`/patient/${row.id}`}
+          style={{
+            textDecoration: 'none'
+          }}
         >
-          {row.name}
-        </Anchor>
+          <Text color="blue">
+            {row.name}
+          </Text>
+        </Link>
       </td>
       <td
         style={{
@@ -115,14 +71,18 @@ export function PatientTable() {
         {row.status}
       </td>
       <td>
-        <Anchor
-          href={`/add-measurement/${row.patientId}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          color="teal"
+        <Link
+          to={`/add-measurement/${row.id}`}
+          style={{
+            textDecoration: 'none'
+          }}
         >
-          Add
-        </Anchor>
+          <Text
+            color="teal"
+          >
+            Add
+          </Text>
+        </Link>
       </td>
     </tr>
   ));

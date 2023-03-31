@@ -21,7 +21,7 @@ import { getRolesRequest, registerRequest } from '../../utils/requests';
 import { useAuth } from '../../hooks/useAuth';
 import { HeaderNav } from '../Header';
 import { useLoading } from '../../hooks/useLoading';
-// import { navLinks } from '../../routes/navLinks';
+import { navLinks } from '../../routes/navLinks';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -95,7 +95,7 @@ export function Auth() {
   useEffect(() => {
     if (user) {
       navigate('/home');
-      // navigate(navLinks.filter((link) => link.label === user.tabs[0])[0].link);
+      navigate(navLinks.filter((link) => link.label === user.tabs[0])[0].link);
     }
   }, [user, navigate]);
 
@@ -118,6 +118,7 @@ export function Auth() {
         ));
         if (response.status === 201) {
           notifications.show({
+            color: 'green',
             type: 'success',
             message: 'Registration successful'
           });

@@ -10,7 +10,7 @@ import { fcmTokenRequest, userRequest } from '../utils/requests';
 import { auth, messaging } from '../utils/firebase';
 import { useLocalStorage } from './useLocalStorage';
 import { useLoading } from './useLoading';
-// import { navLinks } from '../routes/navLinks';
+import { navLinks } from '../routes/navLinks';
 
 const AuthContext = createContext();
 
@@ -97,11 +97,12 @@ export function AuthProvider({ children }) {
       if (response.status === 200) {
         setUser({ ...response.data, token });
         notifications.show({
+          color: 'green',
           title: 'Login successful'
         });
         await checkPermissionsAndSetupFCM(token);
         navigate('/home');
-        // navigate(navLinks.filter((link) => link.label === response.data.tabs[0])[0].link);
+        navigate(navLinks.filter((link) => link.label === response.data.tabs[0])[0].link);
       } else {
         notifications.show({
           color: 'red',
@@ -123,6 +124,7 @@ export function AuthProvider({ children }) {
       await signOut(auth);
       navigate('/auth');
       notifications.show({
+        color: 'green',
         title: 'Logout successful'
       });
       setUser(null);

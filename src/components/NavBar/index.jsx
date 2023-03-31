@@ -79,21 +79,14 @@ export function NavBar({ opened, setOpened }) {
 
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
-  const { logout } = useAuth();
-
-  const user = {
-    name: 'John Doe',
-    email: 'itsme@gmail.com',
-    role: 'Nurse',
-    tabs: ['home', 'add-patient', 'regular-update', 'patient-list', 'settings']
-  };
+  const { logout, user } = useAuth();
 
   useEffect(() => {
     setActive(location.pathname);
   }, [location]);
 
-  // const links = navLinks.filter((item) => user.tabs.includes(item.label)).map((item) => (
-  const links = navLinks.map((item) => (
+  const links = navLinks.filter((item) => user.tabs.includes(item.label)).map((item) => (
+  // const links = navLinks.map((item) => (
     <Link
       className={cx(classes.link, { [classes.linkActive]: (active.includes(item.link) && item.link !== '/home') || item.link === active })}
       to={item.link}

@@ -4,6 +4,7 @@ import {
   Title, Center, SimpleGrid, Box
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { useParams } from 'react-router-dom';
 
 const liquorOptions = [
   { value: 'I', label: 'I' },
@@ -36,6 +37,8 @@ const urineFields = [
 ];
 
 export function CronForm() {
+  const { id } = useParams();
+  console.log(id);
   const form = useForm({
     initialValues: {
       foetalHeartRate: '',
