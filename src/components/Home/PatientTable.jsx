@@ -95,7 +95,7 @@ export function PatientTable() {
   ];
 
   const rows = data.map((row, idx) => (
-    <tr key={row.patientId}>
+    <tr key={`row-${idx * 2}`}>
       <td>{idx + 1}</td>
       <td>
         <Anchor

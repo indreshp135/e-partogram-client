@@ -4,12 +4,13 @@ import { connectAuthEmulator, getAuth } from 'firebase/auth';
 import { connectDatabaseEmulator, getDatabase } from 'firebase/database';
 import { connectFirestoreEmulator, getFirestore } from 'firebase/firestore';
 import { connectStorageEmulator, getStorage } from 'firebase/storage';
+import { getMessaging, onMessage } from 'firebase/messaging';
 import { appCheckDebugToken, firebaseConfig, recaptchaSiteKey } from '../config';
 
 const app = initializeApp(firebaseConfig);
 
 if (process.env.NODE_ENV === 'development') {
-  // eslint-disable-next-line no-restricted-globals
+// eslint-disable-next-line no-restricted-globals
   self.FIREBASE_APPCHECK_DEBUG_TOKEN = appCheckDebugToken;
 }
 
@@ -22,6 +23,8 @@ const auth = getAuth(app);
 const db = getDatabase(app);
 const firestore = getFirestore(app);
 const storage = getStorage(app);
+const messaging = getMessaging(app);
+
 if (process.env.NODE_ENV === 'development') {
   connectAuthEmulator(auth, 'http://localhost:9099');
   connectDatabaseEmulator(db, 'localhost', 9009);
@@ -29,6 +32,10 @@ if (process.env.NODE_ENV === 'development') {
   connectStorageEmulator(storage, 'localhost', 9199);
 }
 
+onMessage(messaging, (payload) => {
+  console.log('Message received. ', payload);
+});
+
 export {
-  auth, app, appCheck, db, firestore, storage
+  auth, app, appCheck, db, firestore, storage, messaging
 };

@@ -5,8 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { notifications } from '@mantine/notifications';
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { userRequest } from '../utils/requests';
-import { auth } from '../utils/firebase';
+import { getToken } from 'firebase/messaging';
+import { fcmTokenRequest, userRequest } from '../utils/requests';
+import { auth, messaging } from '../utils/firebase';
 import { useLocalStorage } from './useLocalStorage';
 import { useLoading } from './useLoading';
 // import { navLinks } from '../routes/navLinks';
@@ -18,6 +19,76 @@ export function AuthProvider({ children }) {
   const navigate = useNavigate();
   const { request } = useLoading();
 
+  const getFCMToken = async () => {
+    try {
+      return await getToken(messaging, {
+        vapidKey: 'BCjqRpUZEvFIJaZFoYqp9vRdOfV0PTx5LSnGCf7uApfSfZ5ONVkmMxdaBrUlKaPjcnPRE4etLoyTA8mY_N0OA5A'
+      });
+    } catch (error) {
+      notifications.show({
+        color: 'red',
+        title: 'Error while enabling notifications',
+        message: error.message
+      });
+      return null;
+    }
+  };
+
+  const setupFCM = async (token) => {
+    const fcmToken = await getFCMToken();
+    if (fcmToken) {
+      try {
+        const response = await request(() => fcmTokenRequest({ token, fcmToken }));
+        if (response.status === 200) {
+          notifications.show({
+            title: 'Notifications enabled'
+          });
+        } else {
+          notifications.show({
+            color: 'red',
+            title: 'Error while enabling notifications'
+          });
+        }
+      } catch (error) {
+        notifications.show({
+          color: 'red',
+          title: 'Error while enabling notifications'
+        });
+      }
+    } else {
+      notifications.show({
+        color: 'red',
+        title: 'Could not enable notifications',
+        message: 'Please enable notifications to receive updates'
+      });
+    }
+  };
+
+  const checkPermissionsAndSetupFCM = async (token) => {
+    try {
+      if (Notification.permission === 'granted') {
+        await setupFCM(token);
+        return;
+      }
+      const permission = await Notification.requestPermission();
+      if (permission === 'granted') {
+        await setupFCM(token);
+      } else {
+        notifications.show({
+          color: 'red',
+          title: 'Could not enable notifications',
+          message: 'Please enable notifications to receive updates'
+        });
+      }
+    } catch (error) {
+      notifications.show({
+        color: 'red',
+        title: 'Could not enable notifications',
+        message: 'Please enable notifications to receive updates'
+      });
+    }
+  };
+
   const login = async (data) => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
@@ -28,6 +99,7 @@ export function AuthProvider({ children }) {
         notifications.show({
           title: 'Login successful'
         });
+        await checkPermissionsAndSetupFCM(token);
         navigate('/home');
         // navigate(navLinks.filter((link) => link.label === response.data.tabs[0])[0].link);
       } else {

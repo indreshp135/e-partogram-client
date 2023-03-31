@@ -11,7 +11,8 @@ import {
   GET_PATIENT_URL,
   ADD_MEASUREMENT_URL,
   LIST_ONDUTY_STAFF_URL,
-  LIST_NEARBY_HOSPITALS_URL
+  LIST_NEARBY_HOSPITALS_URL,
+  FCM_TOKEN_URL
 } from './urls';
 import { appCheck } from './firebase';
 
@@ -144,3 +145,17 @@ export const listOnDutyStaffRequest = (token) => axios.get(`${LIST_ONDUTY_STAFF_
     'X-Token-Firebase': token
   }
 });
+
+// fcm token
+export const fcmTokenRequest = ({
+  token, fcmToken
+}) => axios.post(
+  FCM_TOKEN_URL,
+  { token, fcmToken },
+  {
+    ...requestConfig,
+    headers: {
+      'X-Token-Firebase': token
+    }
+  }
+);
