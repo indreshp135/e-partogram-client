@@ -15,3 +15,5 @@ export const GET_PATIENT_URL = `${BACKEND_URL}/patient/`;
 export const ADD_MEASUREMENT_URL = `${BACKEND_URL}/measurement/add`;
 
 export const LIST_ONDUTY_STAFF_URL = `${BACKEND_URL}/user/onduty`;
+
+export const LIST_NEARBY_HOSPITALS_URL = `${BACKEND_URL}/admin/nearbyhospitals`;

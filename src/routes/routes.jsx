@@ -8,6 +8,7 @@ import { Homepage } from '../components/Home';
 import { PatientData } from '../components/PatientAdmission';
 import { CronForm } from '../components/CronForms';
 import { CanvasChart } from '../components/Chart';
+import { NearByHospitals } from '../components/NearByHospitals';
 
 export const publicRoutes = [
   {
@@ -43,6 +44,12 @@ export const publicRoutes = [
     component: <GeneralPageContainer child={<CanvasChart />} />,
     name: 'PatientHistoryPageContainer',
     label: 'patient-history'
+  },
+  {
+    url: '/nearbyhospital',
+    component: <GeneralPageContainer child={<NearByHospitals />} />,
+    name: 'NearByHospitalPageContainer',
+    label: 'near-by-hospital'
   }
 ];
 

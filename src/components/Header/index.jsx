@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   createStyles, Header, Container, Group, UnstyledButton, Text, Center,
-  useMantineColorScheme, Burger, Paper, MediaQuery, useMantineTheme, Image
+  useMantineColorScheme, Burger, Paper, MediaQuery, useMantineTheme
 } from '@mantine/core';
 import { IconMoon, IconSun } from '@tabler/icons';
 import PropTypes from 'prop-types';
@@ -135,7 +135,7 @@ export function HeaderNav({ opened: open, setOpened }) {
     <Header height={HEADER_HEIGHT} className={classes.root} p="md">
       <Container className={classes.header}>
         <UnstyledButton className={classes.flexer} onClick={() => navigate('/')}>
-          <Image src={logo} height={70} />
+          <img src={logo} height={70} alt="logo" />
         </UnstyledButton>
         <Group spacing={5} className={classes.links}>
           {items}

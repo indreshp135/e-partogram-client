@@ -24,7 +24,7 @@ export function AuthProvider({ children }) {
       const token = await userCredential.user.getIdToken();
       const response = await request(() => userRequest({ token }));
       if (response.status === 200) {
-        setUser(response.data);
+        setUser({ ...response.data, token });
         notifications.show({
           title: 'Login successful'
         });
