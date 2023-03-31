@@ -41,7 +41,8 @@ export function AuthProvider({ children }) {
         const response = await request(() => fcmTokenRequest({ token, fcmToken }));
         if (response.status === 200) {
           notifications.show({
-            title: 'Notifications enabled'
+            title: 'Notifications enabled',
+            color: 'green'
           });
         } else {
           notifications.show({
