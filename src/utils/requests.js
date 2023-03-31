@@ -13,7 +13,11 @@ import {
   ADD_MEASUREMENT_URL,
   LIST_ONDUTY_STAFF_URL,
   LIST_NEARBY_HOSPITALS_URL,
-  FCM_TOKEN_URL
+  FCM_TOKEN_URL,
+  STAFF,
+  CAPACITY,
+  ON_DUTY,
+  LIST_STAFFS
 } from './urls';
 import { appCheck, auth } from './firebase';
 
@@ -183,3 +187,106 @@ export const fcmTokenRequest = ({
     }
   }
 );
+
+export const addHospital = async (
+  name,
+  tier,
+  lat,
+  lon,
+  capacity
+) => {
+  const token = await getIDToken();
+  return axios.post(`${STAFF}`, {
+    name,
+    tier,
+    lat,
+    lon,
+    capacity
+  }, {
+    ...requestConfig,
+    headers: {
+      'X-Token-Firebase': token
+    }
+  });
+};
+
+export const addStaff = async (
+  staffId,
+  isActive
+) => {
+  const token = await getIDToken();
+  return axios.post(`${STAFF}`, {
+    staffId,
+    isActive
+  }, {
+    ...requestConfig,
+    headers: {
+      'X-Token-Firebase': token
+    }
+  });
+};
+
+export const updateStaff = async (
+  staffId,
+  isActive
+) => {
+  const token = await getIDToken();
+  return axios.put(`${STAFF}`, {
+    staffId,
+    isActive
+  }, {
+    ...requestConfig,
+    headers: {
+      'X-Token-Firebase': token
+    }
+  });
+};
+
+export const updateCapacity = async (
+  capacity
+) => {
+  const token = await getIDToken();
+  return axios.put(`${CAPACITY}`, {
+    capacity
+  }, {
+    ...requestConfig,
+    headers: {
+      'X-Token-Firebase': token
+    }
+  });
+};
+
+export const getOnDutyStaff = async () => {
+  const token = await getIDToken();
+  return axios.get(`${ON_DUTY}`, {
+    ...requestConfig,
+    headers: {
+      'X-Token-Firebase': token
+    }
+  });
+};
+
+export const transferPatient = async (
+  patient,
+  toHospital
+) => {
+  const token = await getIDToken();
+  return axios.post(`${LIST_PATIENTS_URL}`, {
+    patient, toHospital
+  }, {
+    ...requestConfig,
+    headers: {
+      'X-Token-Firebase': token
+    }
+  });
+};
+
+export const listUnAssignedStaffs = async () => {
+  const token = await getIDToken();
+  return axios.get(`${LIST_STAFFS}`, {
+    ...requestConfig,
+    headers: {
+      'X-Token-Firebase': token
+    }
+  });
+};
