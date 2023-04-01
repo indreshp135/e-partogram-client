@@ -5,8 +5,9 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Link } from 'react-router-dom';
+import { notifications } from '@mantine/notifications';
 import { useLoading } from '../../hooks/useLoading';
-import { listPatientsRequest } from '../../utils/requests';
+import { dischargePatientRequest, listPatientsRequest } from '../../utils/requests';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -39,18 +40,14 @@ export function PatientTable() {
 
   const [opened, { open, close }] = useDisclosure(false);
   const [selected, setSelected] = useState(null);
+  const [comments, setComments] = useState('');
 
   const { request } = useLoading();
 
   const getPatients = async () => {
     const response = await request(() => listPatientsRequest());
     if (response.status === 200) {
-      setData([{
-        id: 1,
-        name: 'John Doe',
-        status: 'Critical'
-      }]);
-      // setData(response.data);
+      setData(response.data);
     }
   };
 
@@ -58,11 +55,19 @@ export function PatientTable() {
     getPatients();
   }, []);
 
-  const submit = () => {
-    console.log('Discharge', selected);
+  const submit = async () => {
+    const response = await request(() => dischargePatientRequest(selected, comments));
+    if (response.status === 200) {
+      notifications.show({
+        title: 'Success',
+        color: 'green',
+        message: 'Patient discharged successfully'
+      });
+      getPatients();
+    }
   };
 
-  const rows = data.map((row, idx) => (
+  const rows = data.filter((patient) => patient.active).map((row, idx) => (
     <tr key={`row-${idx * 2}`}>
       <td>{idx + 1}</td>
       <td>
@@ -79,10 +84,10 @@ export function PatientTable() {
       </td>
       <td
         style={{
-          color: row.status === 'Critical' ? 'red' : row.status === 'Normal' ? 'green' : 'orange'
+          color: row.critical > 3 ? 'red' : row.critical < 1 ? 'green' : 'orange'
         }}
       >
-        {row.status}
+        {row.critical > 3 ? 'Critical' : row.critical < 1 ? 'Normal' : 'Moderate'}
       </td>
       <td>
         <Anchor
@@ -90,7 +95,6 @@ export function PatientTable() {
           onClick={() => {
             open();
             setSelected(row.id);
-            console.log('Discharge', row.id);
           }}
         >
           Discharge
@@ -116,7 +120,12 @@ export function PatientTable() {
   return (
     <>
       <Modal opened={opened} onClose={close} title="Add Comments">
-        <Textarea placeholder="Add Comments" />
+        <Textarea
+          placeholder="Add Comments"
+          onChange={(e) => {
+            setComments(e.target.value);
+          }}
+        />
         <Center mt={20}>
           <Button
             onClick={() => {

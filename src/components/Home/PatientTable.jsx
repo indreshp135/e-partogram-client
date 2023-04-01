@@ -48,12 +48,12 @@ export function PatientTable() {
     getPatients();
   }, []);
 
-  const rows = data.map((row, idx) => (
+  const rows = data.filter((patient) => patient.active).map((row, idx) => (
     <tr key={`row-${idx * 2}`}>
       <td>{idx + 1}</td>
       <td>
         <Link
-          href={`/patient/${row.id}`}
+          to={`/patient-history/${row.id}`}
           style={{
             textDecoration: 'none'
           }}
@@ -65,10 +65,10 @@ export function PatientTable() {
       </td>
       <td
         style={{
-          color: row.status === 'Critical' ? 'red' : row.status === 'Normal' ? 'green' : 'orange'
+          color: row.critical > 3 ? 'red' : row.critical < 1 ? 'green' : 'orange'
         }}
       >
-        {row.status}
+        {row.critical > 3 ? 'Critical' : row.critical < 1 ? 'Normal' : 'Moderate'}
       </td>
       <td>
         <Link

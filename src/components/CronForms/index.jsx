@@ -21,7 +21,7 @@ import {
 import { notifications } from '@mantine/notifications';
 import { useParams } from 'react-router-dom';
 import { useLoading } from '../../hooks/useLoading';
-import { addPatientRequest } from '../../utils/requests';
+import { addMeasurementRequest } from '../../utils/requests';
 
 const liquorOptions = [
   { value: 'I', label: 'I' },
@@ -49,7 +49,7 @@ const urineFields = [
     name: 'glucose', label: 'Glucose', component: Switch, description: 'Is Glucose present?'
   },
   {
-    name: 'vomitus', label: 'Vomitus', component: Switch, description: 'Is Vomitus present?'
+    name: 'voimitus', label: 'Voimitus', component: Switch, description: 'Is Voimitus present?'
   }
 ];
 
@@ -67,7 +67,6 @@ const useStyles = createStyles((theme) => ({
 
 export function CronForm() {
   const { id } = useParams();
-  console.log(id);
   const initialValues = {
     foetalHeartRate: '',
     liquor: '',
@@ -78,12 +77,13 @@ export function CronForm() {
     pulse: '',
     systolic: '',
     diastolic: '',
+    temperature: '',
     urine: {
       volume: '',
       albumin: false,
       acetone: false,
       glucose: false,
-      vomitus: false
+      voimitus: false
     },
     drugs: ''
   };
@@ -99,7 +99,7 @@ export function CronForm() {
   });
 
   const handleSubmit = async () => {
-    const response = await request(() => addPatientRequest(form.values));
+    const response = await request(() => addMeasurementRequest(id, form.values));
     if (response.status === 201) {
       notifications.show({
         title: 'Success',
@@ -148,6 +148,11 @@ export function CronForm() {
                     label="Contraction"
                     {...form.getInputProps('contraction')}
                     placeholder="Enter contraction"
+                  />
+                  <NumberInput
+                    label="Temperature"
+                    {...form.getInputProps('temperature')}
+                    placeholder="Enter temperature"
                   />
 
                 </Stack>

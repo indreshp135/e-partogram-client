@@ -47,7 +47,7 @@ export const privateRoutes = [
     label: 'add-measurement'
   },
   {
-    url: '/patient-history',
+    url: '/patient-history/:id',
     component: <GeneralPageContainer child={<CanvasChart />} />,
     name: 'PatientHistoryPageContainer',
     label: 'patient-history'

@@ -4,8 +4,9 @@ import {
   Title, Center, Button, Autocomplete
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { notifications } from '@mantine/notifications';
 import { useLoading } from '../../hooks/useLoading';
-import { getAllStaffRequest } from '../../utils/requests';
+import { addStaff, listUnAssignedStaffs } from '../../utils/requests';
 
 export function AddStaff() {
   const [data, setData] = React.useState([]);
@@ -17,22 +18,43 @@ export function AddStaff() {
     }
   });
 
-  const handleSubmit = () => {
-    console.log(form.values);
-  };
-
   const { request } = useLoading();
+
+  const handleSubmit = async () => {
+    try {
+      const response = await request(() => addStaff({
+        staffId: data.filter((staff) => staff.value === form.values.staff)[0].id,
+        isActive: form.values.isActive
+      }));
+      if (response.status === 200) {
+        notifications.show({
+          title: 'Success',
+          color: 'teal',
+          message: 'Staff added successfully'
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const getData = async () => {
     try {
-      const response = await request(getAllStaffRequest);
+      const response = await request(listUnAssignedStaffs);
       if (response.status === 200) {
-        setData(response.data.map((staff) => ({
+        const { doctors, nurses } = response.data.response;
+
+        const fullData = [
+          ...nurses, ...doctors
+        ];
+
+        console.log(fullData);
+
+        setData(fullData.map((staff) => ({
           group: staff.role,
           value: staff.email,
-          id: staff.email
+          id: staff.uid
         })));
-        console.log(data, response);
       }
     } catch (error) {
       console.log(error);

@@ -4,6 +4,9 @@ import {
   Title, Center, rem, Switch
 } from '@mantine/core';
 import '@lottiefiles/lottie-player';
+import { notifications } from '@mantine/notifications';
+import { useLoading } from '../../hooks/useLoading';
+import { getOnDutyStaff, updateStaff } from '../../utils/requests';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -47,19 +50,24 @@ export function ReportStaff() {
 
   const [data, setData] = React.useState([]);
 
+  const { request } = useLoading();
+
   const getData = async () => {
-    setData([
-      {
-        role: 'Doctor',
-        name: 'Dr. John Doe',
-        email: 'john@a.c'
-      },
-      {
-        role: 'Nurse',
-        name: 'Dr. Jane Doe',
-        position: 'jane@a.c'
-      }
-    ]);
+    const response = await request(getOnDutyStaff);
+    if (response.status === 200) {
+      setData(response.data.response);
+    }
+  };
+
+  const changeStatus = async (id, status) => {
+    const response = await request(() => updateStaff(id, status));
+    if (response.status === 200) {
+      notifications.show({
+        title: 'Success',
+        color: 'teal',
+        message: 'Staff status updated successfully'
+      });
+    }
   };
 
   useEffect(() => {
@@ -97,6 +105,9 @@ export function ReportStaff() {
                   size="lg"
                   onLabel="On Duty"
                   offLabel="Off Duty"
+                  onChange={(e) => {
+                    changeStatus(item.uid, e.currentTarget.checked);
+                  }}
                 />
               </div>
             </div>

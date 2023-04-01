@@ -5,8 +5,8 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
-// import { useLoading } from '../../hooks/useLoading';
-// import { getAllStaffRequest } from '../../utils/requests';
+import { useLoading } from '../../hooks/useLoading';
+import { addHospital } from '../../utils/requests';
 
 export function AddHospital() {
   const [lat, setLan] = React.useState(0);
@@ -31,8 +31,17 @@ export function AddHospital() {
     }
   });
 
-  const handleSubmit = () => {
-    console.log(form.values);
+  const { request } = useLoading();
+
+  const handleSubmit = async () => {
+    const response = await request(() => addHospital({ ...form.values, lat, lon }));
+    if (response.status === 200) {
+      notifications.show({
+        title: 'Success',
+        color: 'teal',
+        message: 'Hospital added successfully'
+      });
+    }
   };
 
   //   const { request } = useLoading();

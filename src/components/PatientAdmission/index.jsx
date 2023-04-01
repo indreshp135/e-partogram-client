@@ -65,11 +65,17 @@ export function PatientData() {
   const { request } = useLoading();
 
   const getStaffs = async () => {
-    const response = await request(() => listOnDutyStaffRequest());
+    const response = await request(listOnDutyStaffRequest);
     if (response.status === 200) {
       setStaffs({
-        doctors: response.data.doctorsOnDuty,
-        nurses: response.data.nursesOnDuty
+        doctors: response.data.response.filter((staff) => staff.role === 'Doctor').map((staff) => ({
+          label: staff.name,
+          value: staff.uid
+        })),
+        nurses: response.data.response.filter((staff) => staff.role === 'Nurse').map((staff) => ({
+          label: staff.name,
+          value: staff.uid
+        }))
       });
     }
   };
@@ -96,6 +102,7 @@ export function PatientData() {
         message: response.data.message,
         color: 'teal'
       });
+      setActive(active + 1);
     }
   };
 
@@ -254,7 +261,7 @@ export function PatientData() {
                   <Select
                     label="Select Doctor"
                     withAsterisk
-                    data={staffs.nurses}
+                    data={staffs.doctors}
                     {...form.getInputProps(
                       'doctor'
                     )}
@@ -262,7 +269,7 @@ export function PatientData() {
                   <Select
                     label="Select Nurse"
                     withAsterisk
-                    data={staffs.doctors}
+                    data={staffs.nurses}
                     {...form.getInputProps(
                       'nurse'
                     )}

@@ -3,13 +3,18 @@ import {
   Center,
   Container, Image, Flex, Title, useMantineTheme, Button
 } from '@mantine/core';
+import { useParams } from 'react-router-dom';
 import {
   drawBorder, drawCervix, drawDrugDrops, drawUrine,
   drawContractions, drawFetalHeartRate, drawHeader, drawLiquorMoulding, drawOxytocinDrops
 } from './canvasApi';
 import './loading.css';
+import { getPatientRequest } from '../../utils/requests';
+import { useLoading } from '../../hooks/useLoading';
 
 export function CanvasChart() {
+  const { id } = useParams();
+
   const canvas = useRef(null);
 
   const [height, setHeight] = useState(1950);
@@ -17,24 +22,25 @@ export function CanvasChart() {
   const [imageSrc, setImageSrc] = useState('');
   const theme = useMantineTheme();
 
-  const draw = (ctx) => {
+  const draw = (ctx, data) => {
     if (!ctx) return;
     setHeight(5000);
     setWidth(1300);
     drawBorder(ctx, width, height, theme);
+    console.log(data);
     drawHeader(ctx, width, {
-      name: 'John Doe',
-      age: 20,
-      height: 160,
-      parity: 0,
-      alive: 0,
-      edd: new Date().toLocaleDateString(),
-      sb: 0,
-      nnd: 0,
-      abortion: 0,
-      riskFactors: 'No risk factors',
-      contractionStartTime: new Date().toLocaleTimeString(),
-      membraneRuptureTime: new Date().toLocaleTimeString()
+      name: data.name,
+      age: data.age,
+      height: data.height,
+      parity: data.parity,
+      alive: data.alive,
+      edd: data.edd,
+      sb: data.sb,
+      nnd: data.nnd,
+      abortion: data.abortion,
+      riskFactors: data.riskFactors,
+      contractionStartTime: data.contractionStartTime,
+      membraneRuptureTime: data.membraneRuptureTime
     });
     drawFetalHeartRate(ctx);
     drawLiquorMoulding(ctx);
@@ -48,16 +54,24 @@ export function CanvasChart() {
     }
   };
 
-  useEffect(() => {
+  const { request } = useLoading();
+
+  const getData = async () => {
+    const response = await request(() => getPatientRequest(id));
+    console.log(response.data);
     if (canvas.current) {
       const ctx = canvas.current.getContext('2d');
-      draw(ctx);
+      draw(ctx, response.data.patient);
     }
+  };
+
+  useEffect(() => {
+    getData();
   }, [canvas]);
 
   const downloadAsImage = () => {
     const link = document.createElement('a');
-    link.download = 'patientID-Time.png';
+    link.download = 'Time.png';
     link.href = imageSrc;
     link.click();
   };

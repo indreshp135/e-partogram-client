@@ -17,6 +17,7 @@ import {
   STAFF,
   CAPACITY,
   ON_DUTY,
+  HOSPITAL,
   LIST_STAFFS
 } from './urls';
 import { appCheck, auth } from './firebase';
@@ -136,14 +137,12 @@ export const getPatientRequest = async (id) => axios.get(`${GET_PATIENT_URL}/${i
 });
 
 // add measurement - done
-export const addMeasurementRequest = async ({
+export const addMeasurementRequest = async (
   patientId,
-  measurementType,
-  measurementValue
-}) => axios.post(`${ADD_MEASUREMENT_URL}`, {
+  measurement
+) => axios.post(`${ADD_MEASUREMENT_URL}`, {
   patientId,
-  measurementType,
-  measurementValue
+  ...measurement
 }, {
   ...requestConfig,
   headers: {
@@ -162,18 +161,6 @@ export const listOnDutyStaffRequest = async () => {
   });
 };
 
-// List of all Staffs not part of this hospital
-export const getAllStaffRequest = async () => ({
-  data: [
-    {
-      email: 'indr@a.c',
-      role: 'Nurse',
-      id: 'id'
-    }
-  ],
-  status: 200
-});
-
 // fcm token
 export const fcmTokenRequest = ({
   token, fcmToken
@@ -188,15 +175,15 @@ export const fcmTokenRequest = ({
   }
 );
 
-export const addHospital = async (
+export const addHospital = async ({
   name,
   tier,
   lat,
   lon,
   capacity
-) => {
+}) => {
   const token = await getIDToken();
-  return axios.post(`${STAFF}`, {
+  return axios.post(`${HOSPITAL}`, {
     name,
     tier,
     lat,
@@ -210,10 +197,10 @@ export const addHospital = async (
   });
 };
 
-export const addStaff = async (
+export const addStaff = async ({
   staffId,
   isActive
-) => {
+}) => {
   const token = await getIDToken();
   return axios.post(`${STAFF}`, {
     staffId,
@@ -290,3 +277,17 @@ export const listUnAssignedStaffs = async () => {
     }
   });
 };
+
+// discharge patient
+export const dischargePatientRequest = async (id, comments) => axios.post(
+  `${GET_PATIENT_URL}/${id}/discharge`,
+  {
+    comments
+  },
+  {
+    ...requestConfig,
+    headers: {
+      'X-Token-Firebase': await getIDToken()
+    }
+  }
+);
