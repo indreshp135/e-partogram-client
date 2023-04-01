@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   createStyles, Container, Paper,
   Title, Center
@@ -6,7 +6,9 @@ import {
 import '@lottiefiles/lottie-player';
 import { StatsControls } from './Stats';
 import { PatientTable } from './PatientTable';
-// import { useAuth } from '../../hooks/useAuth';
+
+import { useLoading } from '../../hooks/useLoading';
+import { listPatientsRequest } from '../../utils/requests';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -49,13 +51,38 @@ const useStyles = createStyles((theme) => ({
 
 export function Homepage() {
   const { classes } = useStyles();
+  const [data, setData] = useState([]);
+  const [stat, setStats] = useState({
+    Patients: 0,
+    Critical: 0,
+    Monitored: 0,
+    Normal: 0
+  });
 
-  // const { user } = useAuth();
+  const { request } = useLoading();
+
+  const getPatients = async () => {
+    const response = await request(() => listPatientsRequest());
+    if (response.status === 200) {
+      setData(response.data);
+      setStats({
+        Patients: response.data.length,
+        Critical: response.data.filter((patient) => patient.critical > 3).length,
+        Monitored: response.data.filter((patient) => (patient.critical <= 3
+          && patient.critical > 0)).length,
+        Normal: response.data.filter((patient) => patient.critical === 0).length
+      });
+    }
+  };
+
+  useEffect(() => {
+    getPatients();
+  }, []);
 
   return (
     <div className={classes.root}>
       <Container>
-        <StatsControls />
+        <StatsControls statData={stat} />
         <Center mt={40}>
           <Title className={classes.title} order={3}>
             Patients Details
@@ -63,7 +90,7 @@ export function Homepage() {
         </Center>
         <Paper m={10}>
 
-          <PatientTable />
+          <PatientTable data={data} />
         </Paper>
       </Container>
 

@@ -32,8 +32,8 @@ if (process.env.NODE_ENV === 'development') {
   connectStorageEmulator(storage, 'localhost', 9199);
 }
 
-onMessage(messaging, (payload) => {
-  console.log('Message received. ', payload);
+onMessage(messaging, () => {
+//   console.log('Message received. ', payload);
 });
 
 export {

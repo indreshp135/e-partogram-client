@@ -29,6 +29,7 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="google_translate_element"></div>
     <div id="root"></div>
     <!--
       This HTML file is a template.
@@ -41,4 +42,23 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      console.log("googleTranslateElementInit");
+      new google.translate.TranslateElement(
+        {
+          pageLanguage: "en",
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          autoDisplay: false,
+          includedLanguages: "en,hi,ml,bn,te,kn,ta",
+        },
+        "google_translate_element"
+      );
+    }
+  </script>
+
+  <script
+    type="text/javascript"
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+  ></script>
 </html>

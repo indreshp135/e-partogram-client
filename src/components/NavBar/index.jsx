@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {
   createStyles, Navbar, UnstyledButton,
-  ActionIcon,
-  useMantineColorScheme, Center, Select, getStylesRef, rem
+  ActionIcon, Select,
+  useMantineColorScheme, Center, getStylesRef, rem
 } from '@mantine/core';
 import {
   IconLogout,
@@ -81,6 +81,50 @@ export function NavBar({ opened, setOpened }) {
 
   const { logout, user } = useAuth();
 
+  const [language, setLanguage] = useState('English');
+
+  const magicTranslate = (lng) => {
+    if (lng === language) return;
+    setLanguage(lng);
+
+    const googleTranslateIframes = document.querySelectorAll('iframe.skiptranslate');
+    let googleTranslateIframe = null;
+    if (lng !== 'English') {
+      for (let i = 0; i < googleTranslateIframes.length; i += 1) {
+        if (googleTranslateIframes[i].contentWindow.document.body.innerHTML.includes(lng)) {
+          googleTranslateIframe = googleTranslateIframes[i];
+          break;
+        }
+      }
+      const iframeWindow = googleTranslateIframe.contentWindow.document;
+      const spans = iframeWindow.getElementsByTagName('span');
+      for (let i = 0; i < spans.length; i += 1) {
+        if (spans[i].innerHTML === lng) {
+          spans[i].click();
+          break;
+        }
+      }
+    } else {
+      for (let i = 0; i < googleTranslateIframes.length; i += 1) {
+        if (googleTranslateIframes[i].contentWindow.document.body.innerHTML.includes('Show original')) {
+          googleTranslateIframe = googleTranslateIframes[i];
+          break;
+        }
+      }
+      const iframeWindow = googleTranslateIframe.contentWindow.document;
+      const buttons = iframeWindow.getElementsByTagName('button');
+      for (let i = 0; i < buttons.length; i += 1) {
+        if (buttons[i].innerHTML === 'Show original') {
+          buttons[i].click();
+          break;
+        }
+      }
+    }
+
+    googleTranslateIframe = document.querySelector('iframe.skiptranslate');
+    googleTranslateIframe.style.display = 'none';
+  };
+
   useEffect(() => {
     setActive(location.pathname);
   }, [location]);
@@ -133,16 +177,17 @@ export function NavBar({ opened, setOpened }) {
       <Select
         style={{ marginTop: 20, zIndex: 2 }}
         data={languages.map((item) => ({
-          value: item.code,
-          label: item.name
+          value: item.name,
+          label: item.nativeName
         }))}
         placeholder="Pick one"
         label="Select Language"
+        className="notranslate"
         classNames={classes}
         onChange={(value) => {
-          console.log(value);
+          magicTranslate(value);
         }}
-        value="en"
+        value={language}
       />
 
       <Navbar.Section className={classes.footer}>

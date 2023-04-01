@@ -23,7 +23,12 @@ const useStyles = createStyles(() => ({
     flexWrap: 'nowrap',
     padding: '0 5rem',
     overflowX: 'auto',
-    overflowY: 'hidden'
+    overflowY: 'hidden',
+    '@media (max-width: 900px)': {
+      flexDirection: 'column',
+      overflow: 'hidden',
+      padding: '0 1rem'
+    }
   },
   card: {
     maxWidth: '20rem',
@@ -32,10 +37,14 @@ const useStyles = createStyles(() => ({
     border: 0,
     flexBasis: '20rem',
     flexGrow: 0,
-    flexShrink: 0
+    flexShrink: 0,
+    '@media (max-width: 900px)': {
+      maxWidth: '100%',
+      height: '100%',
+      flexBasis: '100%'
+    }
   }
 }));
-const center = { lat: 48.8584, lng: 2.2945 };
 
 export function NearByHospitals() {
   const { classes } = useStyles();
@@ -51,10 +60,12 @@ export function NearByHospitals() {
   const [duration, setDuration] = useState('0 min');
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [user] = useLocalStorage('user', null);
+  const [center, setCenter] = useState();
   const getNearByHospitals = async () => {
     try {
       const response = await request(() => getNearbyHospitalsRequest(user.token));
       if (response.status === 200) {
+        setCenter({ lat: response.data.response.lat, lng: response.data.response.lon });
         setResponse(response.data.response);
       } else {
         notifications.show({
@@ -105,7 +116,7 @@ export function NearByHospitals() {
   if (!isLoaded) {
     return <Loader />;
   }
-  if (!res.nearby) return <Text>Error Occured</Text>;
+  if (!res.nearby) return <Text> </Text>;
   return (
     <Flex style={{ overflow: 'hidden' }} width="100%" height="90vh" direction="column">
       <Flex
@@ -114,7 +125,8 @@ export function NearByHospitals() {
         sx={{
           flexDirection: 'row',
           '@media (max-width: 900px)': {
-            flexDirection: 'column'
+            flexDirection: 'column',
+            overflow: 'hidden'
           }
         }}
       >
@@ -142,10 +154,7 @@ export function NearByHospitals() {
           width="100%"
           sx={{
             padding: '0 1rem',
-            flexDirection: 'column',
-            '@media (max-width: 900px)': {
-              flexDirection: 'row'
-            }
+            flexDirection: 'column'
           }}
         >
           <Card
@@ -153,7 +162,7 @@ export function NearByHospitals() {
               margin: '0 0 1rem 0',
               width: '20rem',
               '@media (max-width: 900px)': {
-                margin: '1rem 0.5rem',
+                margin: '1rem 0rem',
                 width: '100%'
               }
             }}
@@ -172,13 +181,30 @@ export function NearByHospitals() {
               {`Accomadation Capacity: ${res.capacity}`}
             </Text>
 
+            <Button
+              onClick={() => {
+                notifications.show({
+                  title: 'Success',
+                  color: 'teal',
+                  message: 'Patient Transfer Successfull'
+                });
+              }}
+              type="submit"
+              disabled={select === -1}
+              fullWidth
+              mt="md"
+              radius="md"
+            >
+              Transfer Patient
+            </Button>
+
           </Card>
           <Card
             sx={{
               margin: '1rem 0 0 0',
               width: '20rem',
               '@media (max-width: 900px)': {
-                margin: '1rem 0.5rem',
+                margin: '1rem 0rem',
                 width: '100%'
               }
             }}

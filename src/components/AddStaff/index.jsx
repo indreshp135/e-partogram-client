@@ -34,7 +34,7 @@ export function AddStaff() {
         });
       }
     } catch (error) {
-      console.log(error);
+    //   console.log(error);
     }
   };
 
@@ -48,7 +48,7 @@ export function AddStaff() {
           ...nurses, ...doctors
         ];
 
-        console.log(fullData);
+        // console.log(fullData);
 
         setData(fullData.map((staff) => ({
           group: staff.role,
@@ -57,7 +57,7 @@ export function AddStaff() {
         })));
       }
     } catch (error) {
-      console.log(error);
+    //   console.log(error);
     }
   };
 

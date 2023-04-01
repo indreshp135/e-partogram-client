@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   createStyles, Table, ScrollArea, rem, Text
 } from '@mantine/core';
 import { Link } from 'react-router-dom';
-import { useLoading } from '../../hooks/useLoading';
-import { listPatientsRequest } from '../../utils/requests';
+import { PropTypes } from 'prop-types';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -30,23 +29,9 @@ const useStyles = createStyles((theme) => ({
   }
 }));
 
-export function PatientTable() {
+export function PatientTable({ data }) {
   const { classes, cx } = useStyles();
   const [scrolled, setScrolled] = useState(false);
-  const [data, setData] = useState([]);
-
-  const { request } = useLoading();
-
-  const getPatients = async () => {
-    const response = await request(() => listPatientsRequest());
-    if (response.status === 200) {
-      setData(response.data);
-    }
-  };
-
-  useEffect(() => {
-    getPatients();
-  }, []);
 
   const rows = data.filter((patient) => patient.active).map((row, idx) => (
     <tr key={`row-${idx * 2}`}>
@@ -103,3 +88,12 @@ export function PatientTable() {
     </ScrollArea>
   );
 }
+
+PatientTable.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    critical: PropTypes.number,
+    active: PropTypes.bool
+  })).isRequired
+};

@@ -5,7 +5,7 @@ import {
 } from '@mantine/core';
 import { IconMoon, IconSun } from '@tabler/icons';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import logo from './logo.png';
 
 const HEADER_HEIGHT = 80;
@@ -131,6 +131,9 @@ export function HeaderNav({ opened: open, setOpened }) {
     </UnstyledButton>
   );
 
+  const location = useLocation();
+  console.log(location);
+
   return (
     <Header height={HEADER_HEIGHT} className={classes.root} p="md">
       <Container className={classes.header}>
@@ -146,15 +149,18 @@ export function HeaderNav({ opened: open, setOpened }) {
             {items}
           </Paper>
         ) }
-        <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
-          <Burger
-            opened={open}
-            onClick={() => setOpened((o) => !o)}
-            size="sm"
-            color={theme.colors.gray[6]}
-            mr="xl"
-          />
-        </MediaQuery>
+        {(location.pathname !== '/' && location.pathname !== '/auth')
+        && (
+          <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
+            <Burger
+              opened={open}
+              onClick={() => setOpened((o) => !o)}
+              size="sm"
+              color={theme.colors.gray[6]}
+              mr="xl"
+            />
+          </MediaQuery>
+        ) }
       </Container>
     </Header>
   );
