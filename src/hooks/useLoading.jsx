@@ -16,7 +16,7 @@ export function LoadingProvider({ children }) {
       setIsLoading(false);
       return response;
     } catch (error) {
-      console.log(error);
+    //   console.log(error);
       setIsLoading(false);
       notifications.show({
         color: 'red',

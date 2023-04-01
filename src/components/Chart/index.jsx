@@ -27,7 +27,7 @@ export function CanvasChart() {
     setHeight(5000);
     setWidth(1300);
     drawBorder(ctx, width, height, theme);
-    console.log(data);
+    // console.log(data);
     drawHeader(ctx, width, {
       name: data.name,
       age: data.age,
@@ -58,7 +58,7 @@ export function CanvasChart() {
 
   const getData = async () => {
     const response = await request(() => getPatientRequest(id));
-    console.log(response.data);
+    // console.log(response.data);
     if (canvas.current) {
       const ctx = canvas.current.getContext('2d');
       draw(ctx, response.data.patient);

@@ -139,8 +139,8 @@ export function NavBar({ opened, setOpened }) {
         placeholder="Pick one"
         label="Select Language"
         classNames={classes}
-        onChange={(value) => {
-          console.log(value);
+        onChange={() => {
+        //   console.log(value);
         }}
         value="en"
       />
