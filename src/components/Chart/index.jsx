@@ -27,7 +27,6 @@ export function CanvasChart() {
     setHeight(5000);
     setWidth(1300);
     drawBorder(ctx, width, height, theme);
-    // console.log(data);
     drawHeader(ctx, width, {
       name: data.name,
       age: data.age,
@@ -42,13 +41,25 @@ export function CanvasChart() {
       contractionStartTime: data.contractionStartTime,
       membraneRuptureTime: data.membraneRuptureTime
     });
-    drawFetalHeartRate(ctx);
-    drawLiquorMoulding(ctx);
-    drawCervix(ctx);
-    drawContractions(ctx);
-    drawOxytocinDrops(ctx);
-    drawDrugDrops(ctx);
-    drawUrine(ctx);
+    drawFetalHeartRate(ctx, data.measurements.foetalHeartRate);
+    drawLiquorMoulding(ctx, {
+      liquor: data.measurements.liquor,
+      moulding: data.measurements.moulding
+    });
+    drawCervix(ctx, {
+      cervix: data.measurements.cervix,
+      descent: data.measurements.descent
+    });
+    drawContractions(ctx, data.measurements.contraction);
+    drawOxytocinDrops(ctx, data.measurements.oxytocin);
+    drawDrugDrops(ctx, {
+      drugs: data.measurements.drugs,
+      systolic: data.measurements.systolic,
+      diastolic: data.measurements.diastolic,
+      pulse: data.measurements.pulse,
+      temperature: data.measurements.temperature
+    });
+    drawUrine(ctx, data.measurements.urine);
     if (canvas.current) {
       setImageSrc(canvas.current.toDataURL('image/svg+xml'));
     }
@@ -58,7 +69,6 @@ export function CanvasChart() {
 
   const getData = async () => {
     const response = await request(() => getPatientRequest(id));
-    // console.log(response.data);
     if (canvas.current) {
       const ctx = canvas.current.getContext('2d');
       draw(ctx, response.data.patient);
@@ -71,7 +81,7 @@ export function CanvasChart() {
 
   const downloadAsImage = () => {
     const link = document.createElement('a');
-    link.download = 'Time.png';
+    link.download = 'partogram.png';
     link.href = imageSrc;
     link.click();
   };

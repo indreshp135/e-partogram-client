@@ -16,7 +16,8 @@ import {
   ScrollArea,
   Textarea,
   Center,
-  SimpleGrid
+  SimpleGrid,
+  Kbd
 } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { useParams } from 'react-router-dom';
@@ -61,6 +62,7 @@ const useStyles = createStyles((theme) => ({
         : theme.colors.gray[0],
     padding: theme.spacing.xl,
     borderRadius: theme.radius.md,
+    minHeight: 350,
     cursor: 'pointer'
   }
 }));
@@ -73,11 +75,18 @@ export function CronForm() {
     moulding: '',
     cervix: '',
     descent: '',
-    contraction: '',
+    contraction: {
+      contraction_rate: '',
+      contraction_duration: ''
+    },
     pulse: '',
     systolic: '',
     diastolic: '',
     temperature: '',
+    oxytocin: {
+      dose: '',
+      drops: ''
+    },
     urine: {
       volume: '',
       albumin: false,
@@ -145,21 +154,28 @@ export function CronForm() {
                     placeholder="Enter foetal heart rate"
                   />
                   <NumberInput
-                    label="Contraction"
-                    {...form.getInputProps('contraction')}
-                    placeholder="Enter contraction"
+                    label="Contraction Rate"
+                    {...form.getInputProps('contraction.contraction_rate')}
+                    placeholder="Enter contraction rate"
+                  />
+                  <NumberInput
+                    label="Contraction Duration"
+                    {...form.getInputProps('contraction.contraction_duration')}
+                    placeholder="Enter contraction duration"
                   />
                   <NumberInput
                     label="Temperature"
                     {...form.getInputProps('temperature')}
                     placeholder="Enter temperature"
+                    rightSectionWidth={40}
+                    rightSection={<Kbd>°C</Kbd>}
                   />
 
                 </Stack>
               </Box>
             </ScrollArea>
           </Stepper.Step>
-          <Stepper.Step description="30 Minutes" label="Pulses">
+          <Stepper.Step description="30 Minutes" label="Pulses and Oxytocin">
             <ScrollArea style={{ height: 350 }}>
               <Box className={classes.box}>
                 <Stack
@@ -189,6 +205,7 @@ export function CronForm() {
                     {...form.getInputProps('diastolic')}
                     placeholder="Enter diastolic"
                   />
+
                 </Stack>
               </Box>
             </ScrollArea>
@@ -309,6 +326,27 @@ export function CronForm() {
                           ))}
                         </SimpleGrid>
                       </Center>
+                    </Box>
+                    <Title order={3}>Oxytocin</Title>
+                    <Box
+                      shadow="sm"
+                      p={20}
+                      sx={{
+                        borderRadius: 20,
+                        border: '1px solid'
+
+                      }}
+                    >
+                      <NumberInput
+                        label="Dose"
+                        {...form.getInputProps('oxytocin.dose')}
+                        placeholder="Enter dose"
+                      />
+                      <NumberInput
+                        label="Drops"
+                        {...form.getInputProps('oxytocin.drops')}
+                        placeholder="Enter drops"
+                      />
                     </Box>
                   </Stack>
                 </Stack>

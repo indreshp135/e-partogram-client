@@ -8,6 +8,7 @@ import {
   IconStethoscope,
   IconUserCheck
 } from '@tabler/icons';
+import { PropTypes } from 'prop-types';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -137,7 +138,7 @@ const data = [
   { icon: IconVaccine, label: 'Critical' }
 ];
 
-export function StatsControls() {
+export function StatsControls({ statData }) {
   const { classes } = useStyles();
   const date = useRef(new Date());
 
@@ -155,7 +156,7 @@ export function StatsControls() {
               textAlign: 'center'
             }}
           >
-            0
+            {statData[stat.label]}
           </Text>
         </Stack>
 
@@ -183,3 +184,14 @@ export function StatsControls() {
     </div>
   );
 }
+
+StatsControls.propTypes = {
+  statData: PropTypes.shape(
+    {
+      Patient: PropTypes.number.isRequired,
+      Normal: PropTypes.number.isRequired,
+      Monitored: PropTypes.number.isRequired,
+      Critical: PropTypes.number.isRequired
+    }
+  ).isRequired
+};
