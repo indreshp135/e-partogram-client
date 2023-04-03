@@ -10,6 +10,15 @@ import { LoadingProvider } from './hooks/useLoading';
 function App() {
   const [colorScheme, setColorScheme] = useState('light');
   const toggleColorScheme = (value) => setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+
+  // on document refresh
+  window.addEventListener('load', () => {
+    const googleTranslateIframe = document.querySelectorAll('iframe.skiptranslate');
+    for (let i = 0; i < googleTranslateIframe.length; i += 1) {
+      googleTranslateIframe[i].style.display = 'none';
+    }
+  });
+
   return (
     <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
       <MantineProvider
