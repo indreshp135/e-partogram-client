@@ -1,10 +1,13 @@
-import React, {
-  createContext, useContext, useMemo
-} from 'react';
+import React, { createContext, useContext, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { notifications } from '@mantine/notifications';
-import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import {
+  signInWithEmailAndPassword,
+  signOut,
+  browserSessionPersistence,
+  setPersistence
+} from 'firebase/auth';
 import { getToken } from 'firebase/messaging';
 import { fcmTokenRequest, userRequest } from '../utils/requests';
 import { auth, messaging } from '../utils/firebase';
@@ -22,7 +25,8 @@ export function AuthProvider({ children }) {
   const getFCMToken = async () => {
     try {
       return await getToken(messaging, {
-        vapidKey: 'BCjqRpUZEvFIJaZFoYqp9vRdOfV0PTx5LSnGCf7uApfSfZ5ONVkmMxdaBrUlKaPjcnPRE4etLoyTA8mY_N0OA5A'
+        vapidKey:
+          'BCjqRpUZEvFIJaZFoYqp9vRdOfV0PTx5LSnGCf7uApfSfZ5ONVkmMxdaBrUlKaPjcnPRE4etLoyTA8mY_N0OA5A'
       });
     } catch (error) {
       notifications.show({
@@ -92,7 +96,12 @@ export function AuthProvider({ children }) {
 
   const login = async (data) => {
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
+      await setPersistence(auth, browserSessionPersistence);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
       const token = await userCredential.user.getIdToken();
       const response = await request(() => userRequest({ token }));
       if (response.status === 200) {
@@ -103,7 +112,10 @@ export function AuthProvider({ children }) {
         });
         await checkPermissionsAndSetupFCM(token);
         navigate('/home');
-        navigate(navLinks.filter((link) => link.label === response.data.tabs[0])[0].link);
+        navigate(
+          navLinks.filter((link) => link.label === response.data.tabs[0])[0]
+            .link
+        );
       } else {
         notifications.show({
           color: 'red',
