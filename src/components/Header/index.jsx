@@ -132,7 +132,6 @@ export function HeaderNav({ opened: open, setOpened }) {
   );
 
   const location = useLocation();
-  console.log(location);
 
   return (
     <Header height={HEADER_HEIGHT} className={classes.root} p="md">

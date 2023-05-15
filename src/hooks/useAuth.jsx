@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 import { notifications } from '@mantine/notifications';
 import {
   signInWithEmailAndPassword,
-  signOut,
-  browserSessionPersistence,
-  setPersistence
+  signOut
 } from 'firebase/auth';
 import { getToken } from 'firebase/messaging';
 import { fcmTokenRequest, userRequest } from '../utils/requests';
@@ -96,13 +94,14 @@ export function AuthProvider({ children }) {
 
   const login = async (data) => {
     try {
-      await setPersistence(auth, browserSessionPersistence);
       const userCredential = await signInWithEmailAndPassword(
         auth,
         data.email,
         data.password
       );
       const token = await userCredential.user.getIdToken();
+
+      localStorage.setItem('firebase-id-token', token);
       const response = await request(() => userRequest({ token }));
       if (response.status === 200) {
         setUser({ ...response.data, token });

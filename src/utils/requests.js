@@ -20,12 +20,12 @@ import {
   HOSPITAL,
   LIST_STAFFS
 } from './urls';
-import { appCheck, auth } from './firebase';
+import { appCheck } from './firebase';
 
 const getIDToken = async () => {
-  const user = await auth.currentUser;
-  if (user) {
-    return user.getIdToken(true);
+  const idToken = localStorage.getItem('firebase-id-token');
+  if (idToken) {
+    return idToken;
   }
   return null;
 };

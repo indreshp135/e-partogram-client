@@ -111,12 +111,7 @@ export function CanvasChart() {
           <Image py={10} src={imageSrc} alt="Chiller Diagram" radius="xs" />
         </Container>
       ) : (
-        <div className="loading">
-          <div className="loading-1" />
-          <div className="loading-2" />
-          <div className="loading-3" />
-          <div className="loading-4" />
-        </div>
+        <div />
       )}
     </>
   );

@@ -91,7 +91,7 @@ export function PatientTable({ data }) {
 
 PatientTable.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     name: PropTypes.string,
     critical: PropTypes.number,
     active: PropTypes.bool
