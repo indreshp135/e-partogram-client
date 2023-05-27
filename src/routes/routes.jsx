@@ -13,6 +13,7 @@ import { AddStaff } from '../components/AddStaff';
 import { AddHospital } from '../components/AddHospital';
 import { Discharge } from '../components/DischargePatients';
 import { ReportStaff } from '../components/ReportStaff';
+import { RisksAndSuggestions } from '../components/RisksFactors';
 
 export const publicRoutes = [
   {
@@ -81,5 +82,11 @@ export const privateRoutes = [
     component: <GeneralPageContainer child={<ReportStaff />} />,
     name: 'ReportStaffContainer',
     label: 'Staff On Duty'
+  },
+  {
+    url: '/patient-risks/:id',
+    component: <GeneralPageContainer child={<RisksAndSuggestions />} />,
+    name: 'RisksAndSuggestionsContainer',
+    label: 'Risks & Suggestions'
   }
 ];

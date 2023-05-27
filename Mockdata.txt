@@ -1,0 +1,484 @@
+  // const dataPointsMock = [
+  //   {
+  //     timeStamp: 8, value: 126
+  //   },
+  //   {
+  //     timeStamp: 8.6, value: 138
+  //   },
+  //   {
+  //     timeStamp: 9.2, value: 150
+  //   },
+  //   {
+  //     timeStamp: 9.50, value: 160
+  //   },
+  //   {
+  //     timeStamp: 10.00, value: 165
+  //   },
+  //   {
+  //     timeStamp: 10.550, value: 149
+  //   },
+  //   {
+  //     timeStamp: 11.001, value: 129
+  //   },
+  //   {
+  //     timeStamp: 11.50, value: 130
+  //   },
+  //   {
+  //     timeStamp: 12.01, value: 140
+  //   },
+  //   {
+  //     timeStamp: 12.51, value: 145
+  //   },
+  //   {
+  //     timeStamp: 13.01, value: 155
+  //   },
+  //   {
+  //     timeStamp: 13.61, value: 140
+  //   },
+  //   {
+  //     timeStamp: 14.01, value: 135
+  //   },
+  //   {
+  //     timeStamp: 14.50, value: 130
+  //   },
+  //   {
+  //     timeStamp: 15.00, value: 130
+  //   }
+  // ];
+  // Write text
+  // horizontal lines
+  // Draw the graph with data points
+    // Draw a line
+  // const dataPointsMock = {
+  //   liquor: [
+  //     {
+  //       timeStamp: 8,
+  //       value: 'I'
+  //     },
+  //     {
+  //       timeStamp: 9.2,
+  //       value: 'I'
+  //     },
+  //     {
+  //       timeStamp: 10.00,
+  //       value: 'I'
+  //     },
+  //     {
+  //       timeStamp: 11.001,
+  //       value: 'C'
+  //     },
+  //     {
+  //       timeStamp: 12.01,
+  //       value: 'C'
+  //     },
+  //     {
+  //       timeStamp: 13.01,
+  //       value: 'C'
+  //     },
+  //     {
+  //       timeStamp: 14.01,
+  //       value: 'C'
+  //     },
+  //     {
+  //       timeStamp: 15.00,
+  //       value: 'M1'
+  //     }
+  //   ],
+  //   moulding: [
+  //     {
+  //       timeStamp: 8,
+  //       value: '0'
+  //     },
+  //     {
+  //       timeStamp: 9.2,
+  //       value: '0'
+  //     },
+  //     {
+  //       timeStamp: 10.00,
+  //       value: '1'
+  //     },
+  //     {
+  //       timeStamp: 11.001,
+  //       value: '1'
+  //     },
+  //     {
+  //       timeStamp: 12.01,
+  //       value: '1'
+  //     },
+  //     {
+  //       timeStamp: 13.01,
+  //       value: '1'
+  //     },
+  //     {
+  //       timeStamp: 14.01,
+  //       value: '2'
+  //     },
+  //     {
+  //       timeStamp: 15.00,
+  //       value: '2'
+  //     }
+  //   ]
+  // };
+  // Write text
+  // horizontal lines
+  // Draw the graph with data points
+  // Write text
+  // horizontal lines
+  // vertical line from 0 to 10
+  // horizontal line at top and bottom
+  // write text in the middle
+  // vertical line from 5 to 10
+  // horizontal line at top and bottom
+  // write text in the middle
+  // Plot data points
+    // Draw line to previous point
+    // Draw line to previous point
+  // Write text
+  // horizontal lines
+  // horizontal lines
+  // Write text
+  // horizontal lines
+  // const dataPointsMock = {
+  //   drugs: [
+  //     {
+  //       timeStamp: 8,
+  //       value: 'None'
+  //     },
+  //     {
+  //       timeStamp: 8.6,
+  //       value: 'None'
+  //     },
+  //     {
+  //       timeStamp: 9.2,
+  //       value: 'None'
+  //     },
+  //     {
+  //       timeStamp: 9.50,
+  //       value: 'None'
+  //     },
+  //     {
+  //       timeStamp: 10.00,
+  //       value: 'None'
+  //     },
+  //     {
+  //       timeStamp: 10.550,
+  //       value: 'None'
+  //     },
+  //     {
+  //       timeStamp: 11.001,
+  //       value: 'None'
+  //     },
+  //     {
+  //       timeStamp: 11.50,
+  //       value: 'None'
+  //     },
+  //     {
+  //       timeStamp: 12.01,
+  //       value: 'None'
+  //     },
+  //     {
+  //       timeStamp: 12.51,
+  //       value: 'None'
+  //     },
+  //     {
+  //       timeStamp: 13.01,
+  //       value: 'None'
+  //     },
+  //     {
+  //       timeStamp: 13.61,
+  //       value: 'None'
+  //     },
+  //     {
+  //       timeStamp: 14.01,
+  //       value: 'None'
+  //     },
+  //     {
+  //       timeStamp: 14.50,
+  //       value: 'None'
+  //     },
+  //     {
+  //       timeStamp: 15.00,
+  //       value: 'None'
+  //     }
+  //   ],
+  //   systolic: [
+  //     {
+  //       timeStamp: 8,
+  //       value: 110
+  //     },
+  //     {
+  //       timeStamp: 8.6,
+  //       value: 112
+  //     },
+  //     {
+  //       timeStamp: 9.2,
+  //       value: 115
+  //     },
+  //     {
+  //       timeStamp: 9.50,
+  //       value: 117
+  //     },
+  //     {
+  //       timeStamp: 10.00,
+  //       value: 120
+  //     },
+  //     {
+  //       timeStamp: 10.550,
+  //       value: 122
+  //     },
+  //     {
+  //       timeStamp: 11.001,
+  //       value: 125
+  //     },
+  //     {
+  //       timeStamp: 11.50,
+  //       value: 127
+  //     },
+  //     {
+  //       timeStamp: 12.01,
+  //       value: 130
+  //     },
+  //     {
+  //       timeStamp: 12.51,
+  //       value: 128
+  //     },
+  //     {
+  //       timeStamp: 13.01,
+  //       value: 127
+  //     },
+  //     {
+  //       timeStamp: 13.61,
+  //       value: 126
+  //     },
+  //     {
+  //       timeStamp: 14.01,
+  //       value: 125
+  //     },
+  //     {
+  //       timeStamp: 14.50,
+  //       value: 127
+  //     },
+  //     {
+  //       timeStamp: 15.00,
+  //       value: 125
+  //     }
+  //   ],
+  //   diastolic: [
+  //     {
+  //       timeStamp: 8,
+  //       value: 70
+  //     },
+  //     {
+  //       timeStamp: 8.6,
+  //       value: 65
+  //     },
+  //     {
+  //       timeStamp: 9.2,
+  //       value: 68
+  //     },
+  //     {
+  //       timeStamp: 9.50,
+  //       value: 69
+  //     },
+  //     {
+  //       timeStamp: 10.00,
+  //       value: 60
+  //     },
+  //     {
+  //       timeStamp: 10.550,
+  //       value: 75
+  //     },
+  //     {
+  //       timeStamp: 11.001,
+  //       value: 80
+  //     },
+  //     {
+  //       timeStamp: 11.50,
+  //       value: 76
+  //     },
+  //     {
+  //       timeStamp: 12.01,
+  //       value: 78
+  //     },
+  //     {
+  //       timeStamp: 12.51,
+  //       value: 66
+  //     },
+  //     {
+  //       timeStamp: 13.01,
+  //       value: 72
+  //     },
+  //     {
+  //       timeStamp: 13.61,
+  //       value: 75
+  //     },
+  //     {
+  //       timeStamp: 14.01,
+  //       value: 74
+  //     },
+  //     {
+  //       timeStamp: 14.50,
+  //       value: 71
+  //     },
+  //     {
+  //       timeStamp: 15.00,
+  //       value: 79
+  //     }
+  //   ],
+  //   temperature: [
+  //     {
+  //       timeStamp: 8,
+  //       value: 36
+  //     },
+  //     {
+  //       timeStamp: 8.6,
+  //       value: 36.5
+  //     },
+  //     {
+  //       timeStamp: 9.2,
+  //       value: 36.9
+  //     },
+  //     {
+  //       timeStamp: 9.50,
+  //       value: 37
+  //     },
+  //     {
+  //       timeStamp: 10.00,
+  //       value: 37.5
+  //     },
+  //     {
+  //       timeStamp: 10.550,
+  //       value: 38
+  //     },
+  //     {
+  //       timeStamp: 11.001,
+  //       value: 37.8
+  //     },
+  //     {
+  //       timeStamp: 11.50,
+  //       value: 37.5
+  //     },
+  //     {
+  //       timeStamp: 12.01,
+  //       value: 37.2
+  //     },
+  //     {
+  //       timeStamp: 12.51,
+  //       value: 37.5
+  //     },
+  //     {
+  //       timeStamp: 13.01,
+  //       value: 37.6
+  //     },
+  //     {
+  //       timeStamp: 13.61,
+  //       value: 37.4
+  //     },
+  //     {
+  //       timeStamp: 14.01,
+  //       value: 37.6
+  //     },
+  //     {
+  //       timeStamp: 14.50,
+  //       value: 37.7
+  //     },
+  //     {
+  //       timeStamp: 15.00,
+  //       value: 36
+  //     }
+  //   ],
+  //   pulse: [
+  //     {
+  //       timeStamp: 8,
+  //       value: 70
+  //     },
+  //     {
+  //       timeStamp: 8.6,
+  //       value: 75
+  //     },
+  //     {
+  //       timeStamp: 9.2,
+  //       value: 80
+  //     },
+  //     {
+  //       timeStamp: 9.50,
+  //       value: 90
+  //     },
+  //     {
+  //       timeStamp: 10.00,
+  //       value: 100
+  //     },
+  //     {
+  //       timeStamp: 10.550,
+  //       value: 120
+  //     },
+  //     {
+  //       timeStamp: 11.001,
+  //       value: 125
+  //     },
+  //     {
+  //       timeStamp: 11.50,
+  //       value: 130
+  //     },
+  //     {
+  //       timeStamp: 12.01,
+  //       value: 115
+  //     },
+  //     {
+  //       timeStamp: 12.51,
+  //       value: 110
+  //     },
+  //     {
+  //       timeStamp: 13.01,
+  //       value: 100
+  //     },
+  //     {
+  //       timeStamp: 13.61,
+  //       value: 105
+  //     },
+  //     {
+  //       timeStamp: 14.01,
+  //       value: 116
+  //     },
+  //     {
+  //       timeStamp: 14.50,
+  //       value: 110
+  //     },
+  //     {
+  //       timeStamp: 15.00,
+  //       value: 111
+  //     }
+  //   ]
+  // };
+  // Write text
+  // horizontal lines
+  // horizontal lines
+  // Draw data points
+    // write text in vertical lines
+    // draw X axis
+    // draw X axis
+    // draw X axis
+    // draw X axis
+  // const dataPointsMock = [
+  //   {
+  //     timeStamp: 8,
+  //     volume: 100,
+  //     albumin: false,
+  //     acetone: false,
+  //     glucose: false,
+  //     voimitus: false
+  //   },
+  //   {
+  //     timeStamp: 12.01,
+  //     volume: 100,
+  //     albumin: false,
+  //     acetone: false,
+  //     glucose: true,
+  //     voimitus: true
+  //   }
+  // ];
+  // Write text
+  // horizontal lines
+  // Write data points
+    // write text in vertical lines
+    // fill +ve if true and -ve if false

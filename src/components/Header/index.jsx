@@ -34,9 +34,11 @@ const useStyles = createStyles((theme) => ({
 
   header: {
     display: 'flex',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    height: '100%'
+    height: '100%',
+    [theme.fn.largerThan('sm')]: {
+      justifyContent: 'space-between'
+    }
   },
 
   links: {
@@ -136,12 +138,6 @@ export function HeaderNav({ opened: open, setOpened }) {
   return (
     <Header height={HEADER_HEIGHT} className={classes.root} p="md">
       <Container className={classes.header}>
-        <UnstyledButton className={classes.flexer} onClick={() => navigate('/')}>
-          <img src={logo} height={70} alt="logo" />
-        </UnstyledButton>
-        <Group spacing={5} className={classes.links}>
-          {items}
-        </Group>
         {open
         && (
           <Paper className={classes.dropdown} withBorder>
@@ -160,6 +156,13 @@ export function HeaderNav({ opened: open, setOpened }) {
             />
           </MediaQuery>
         ) }
+        <UnstyledButton className={classes.flexer} onClick={() => navigate('/')}>
+          <img src={logo} height={70} alt="logo" />
+        </UnstyledButton>
+        <Group spacing={5} className={classes.links}>
+          {items}
+        </Group>
+
       </Container>
     </Header>
   );

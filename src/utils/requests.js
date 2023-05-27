@@ -180,7 +180,10 @@ export const addHospital = async ({
   tier,
   lat,
   lon,
-  capacity
+  capacity,
+  specialist,
+  cesarean
+
 }) => {
   const token = await getIDToken();
   return axios.post(`${HOSPITAL}`, {
@@ -188,7 +191,9 @@ export const addHospital = async ({
     tier,
     lat,
     lon,
-    capacity
+    capacity,
+    specialist,
+    cesarean
   }, {
     ...requestConfig,
     headers: {

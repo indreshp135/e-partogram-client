@@ -69,6 +69,20 @@ export function PatientTable({ data }) {
           </Text>
         </Link>
       </td>
+      <td>
+        <Link
+          to={`/patient-risks/${row.id}`}
+          style={{
+            textDecoration: 'none'
+          }}
+        >
+          <Text
+            color="teal"
+          >
+            Check
+          </Text>
+        </Link>
+      </td>
     </tr>
   ));
 
@@ -81,6 +95,7 @@ export function PatientTable({ data }) {
             <th>Name</th>
             <th>Status</th>
             <th>Measurement</th>
+            <th>History</th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>

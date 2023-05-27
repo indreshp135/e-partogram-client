@@ -115,6 +115,13 @@ export function CronForm() {
         message: response.data.message,
         color: 'teal'
       });
+      if (response.data.risks.length > 0) {
+        notifications.show({
+          title: 'Warning Risks Found',
+          message: 'Please check the risks tab for more details',
+          color: 'red'
+        });
+      }
     }
   };
 

@@ -126,12 +126,12 @@ export const drawHeader = (ctx, width, {
     ctx.fillText(`Alive: ${alive}`, row2XStart + gapForColumns5, row2YStart);
     ctx.fillText(`SB: ${sb}`, row2XStart + gapForColumns5 * 2, row2YStart);
     ctx.fillText(`NND: ${nnd}`, row2XStart + gapForColumns5 * 3, row2YStart);
-    ctx.fillText(`Abortion: ${abortion}`, row2XStart + gapForColumns5 * 4, row2YStart);
+    console.log(abortion);
 
     ctx.fillText(`EDD: ${edd}`, row3XStart, row3YStart);
     ctx.fillText(`Contraction Start: ${contractionStartTime}`, row3XStart + gapForColumns3, row3YStart);
 
-    ctx.fillText(`Membrane Rupture Start: ${membraneRuptureTime}`, row3XStart + 2 * gapForColumns3, row3YStart);
+    if (membraneRuptureTime) { ctx.fillText(`Membrane Rupture Start: ${membraneRuptureTime}`, row3XStart + 2 * gapForColumns3, row3YStart); }
 
     ctx.beginPath();
     ctx.moveTo(50, 100);
@@ -394,7 +394,7 @@ export const drawContractions = (ctx, dataPointsMock) => {
     }
   }
   for (let i = 0; i < dataPointsMock.length; i += 1) {
-    if (dataPointsMock[0].value.contraction_rate > 40) {
+    if (dataPointsMock[0].value.contraction_duration > 40) {
       drawFillRect(
         ctx,
         GRAPH_START_X + Math.round(dataPointsMock[i].timeStamp) * 30,
@@ -402,7 +402,7 @@ export const drawContractions = (ctx, dataPointsMock) => {
         30,
         40
       );
-    } else if (dataPointsMock[0].value.contraction_rate > 20) {
+    } else if (dataPointsMock[0].value.contraction_duration > 20) {
       drawTwoParallelLines(
         ctx,
         GRAPH_START_X + Math.round(dataPointsMock[i].timeStamp) * 30,
@@ -505,20 +505,22 @@ export const drawDrugDrops = (ctx, dataPointsMock) => {
     ctx.stroke();
     if (180 - i * 10 >= 60) {
       ctx.fillText(180 - i * 10, GRAPH_START_X - 5, DRUG_GRAPH_START_Y + i * 20 + 150);
-      ctx.fillText(i / 2 + 34, GRAPH_START_X - 5 + 13 * 60, DRUG_GRAPH_START_Y + i * 20 + 150);
+      ctx.fillText(40 - i / 2, GRAPH_START_X - 5 + 13 * 60, DRUG_GRAPH_START_Y + i * 20 + 150);
     }
   }
 
-  for (let i = 0; i < dataPointsMock.drugs.length; i += 1) {
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'top';
-    ctx.rotate(-Math.PI / 2);
-    ctx.fillText(
-      dataPointsMock.drugs[i].value,
-      -DRUG_GRAPH_START_Y - 100,
-      GRAPH_START_X + dataPointsMock.drugs[i].timeStamp * 30
-    );
-    ctx.rotate(Math.PI / 2);
+  if (dataPointsMock.drugs) {
+    for (let i = 0; i < dataPointsMock.drugs.length; i += 1) {
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillText(
+        dataPointsMock.drugs[i].value,
+        -DRUG_GRAPH_START_Y - 100,
+        GRAPH_START_X + dataPointsMock.drugs[i].timeStamp * 30
+      );
+      ctx.rotate(Math.PI / 2);
+    }
   }
 
   for (let i = 0; i < dataPointsMock.pulse.length; i += 1) {
@@ -549,7 +551,7 @@ export const drawDrugDrops = (ctx, dataPointsMock) => {
     drawOMark(
       ctx,
       GRAPH_START_X + dataPointsMock.diastolic[i].timeStamp * 30,
-      DRUG_GRAPH_START_Y + 160 + (dataPointsMock.diastolic[i].value - 34) * 2
+      DRUG_GRAPH_START_Y + 160 + (40 - dataPointsMock.temperature[i].value) * 40
     );
   }
 };
@@ -606,17 +608,17 @@ export const drawUrine = (ctx, dataPointsMock) => {
     );
 
     ctx.fillText(
-      dataPointsMock[i].albumin ? '+ ve' : '- ve',
+      dataPointsMock[i].acetone ? '+ ve' : '- ve',
       GRAPH_START_X + Math.round(dataPointsMock[i].timeStamp) * 30 - 15,
       URINE_GRAPH_START_Y + 100
     );
     ctx.fillText(
-      dataPointsMock[i].albumin ? '+ ve' : '- ve',
+      dataPointsMock[i].glucose ? '+ ve' : '- ve',
       GRAPH_START_X + Math.round(dataPointsMock[i].timeStamp) * 30 - 15,
       URINE_GRAPH_START_Y + 140
     );
     ctx.fillText(
-      dataPointsMock[i].albumin ? '+ ve' : '- ve',
+      dataPointsMock[i].voimitus ? '+ ve' : '- ve',
       GRAPH_START_X + Math.round(dataPointsMock[i].timeStamp) * 30 - 15,
       URINE_GRAPH_START_Y + 180
     );

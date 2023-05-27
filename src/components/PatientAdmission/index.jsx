@@ -49,7 +49,6 @@ export function PatientData() {
 
     riskFactors: '',
     contractionStartTime: new Date(),
-    membraneRuptureTime: new Date(),
 
     doctor: '',
     nurse: ''
@@ -217,7 +216,6 @@ export function PatientData() {
                 >
                   <Textarea
                     label="Risk Factors"
-                    withAsterisk
                     {...form.getInputProps('riskFactors')}
                     placeholder="Enter risk factors"
                   />
