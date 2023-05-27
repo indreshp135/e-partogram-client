@@ -31,61 +31,61 @@ export const publicRoutes = [
 export const privateRoutes = [
   {
     url: '/home',
-    component: <GeneralPageContainer child={<Homepage />} />,
+    component: <GeneralPageContainer child={<Homepage />} name="HomePage" />,
     name: 'HomePageContainer',
     label: 'home'
   },
   {
     url: '/add-patient',
-    component: <GeneralPageContainer child={<PatientData />} />,
+    component: <GeneralPageContainer child={<PatientData />} name="PatientDataPage" />,
     name: 'PatientDataPageContainer',
     label: 'add-patient'
   },
   {
     url: '/add-measurement/:id',
-    component: <GeneralPageContainer child={<CronForm />} />,
+    component: <GeneralPageContainer child={<CronForm />} name="CronFormPage" />,
     name: 'CronFormPageContainer',
     label: 'add-measurement'
   },
   {
     url: '/patient-history/:id',
-    component: <GeneralPageContainer child={<CanvasChart />} />,
+    component: <GeneralPageContainer child={<CanvasChart />} name="PatientHistoryPage" />,
     name: 'PatientHistoryPageContainer',
     label: 'patient-history'
   },
   {
     url: '/nearbyhospital/:id',
-    component: <GeneralPageContainer child={<NearByHospitals />} />,
+    component: <GeneralPageContainer child={<NearByHospitals />} name="NearByHospitalPage" />,
     name: 'NearByHospitalPageContainer',
     label: 'near-by-hospital'
   },
   {
     url: '/add-staff',
-    component: <GeneralPageContainer child={<AddStaff />} />,
+    component: <GeneralPageContainer child={<AddStaff />} name="AddStaffPage" />,
     name: 'AddStaffContainer',
     label: 'add-staff'
   },
   {
     url: '/update-details',
-    component: <GeneralPageContainer child={<AddHospital />} />,
+    component: <GeneralPageContainer child={<AddHospital />} name="AddHospitalPage" />,
     name: 'AddHospitalContainer',
     label: 'update-details'
   },
   {
     url: '/discharge-patient',
-    component: <GeneralPageContainer child={<Discharge />} />,
+    component: <GeneralPageContainer child={<Discharge />} name="DischargePage" />,
     name: 'DischargeContainer',
     label: 'discharge-patient'
   },
   {
     url: '/report-staff',
-    component: <GeneralPageContainer child={<ReportStaff />} />,
+    component: <GeneralPageContainer child={<ReportStaff />} name="ReportStaffContainer" />,
     name: 'ReportStaffContainer',
     label: 'Staff On Duty'
   },
   {
     url: '/patient-risks/:id',
-    component: <GeneralPageContainer child={<RisksAndSuggestions />} />,
+    component: <GeneralPageContainer child={<RisksAndSuggestions />} name="RisksAndSuggestionsContainer" />,
     name: 'RisksAndSuggestionsContainer',
     label: 'Risks & Suggestions'
   }

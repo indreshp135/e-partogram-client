@@ -42,6 +42,7 @@ function Switches() {
       {publicRoutes.map((route) => (
         <Route
           exact
+          name={route.name}
           element={route.component}
           path={route.url}
           key={route.url}
@@ -51,11 +52,10 @@ function Switches() {
         <Route
           path={route.url}
           key={route.url}
+          name={route.name}
           element={(
             <ProtectedRoute isAuthenticated={!!user}>
-              {' '}
               {route.component}
-              {' '}
             </ProtectedRoute>
           )}
         />
