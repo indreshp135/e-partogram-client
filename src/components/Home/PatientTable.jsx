@@ -94,7 +94,7 @@ export function PatientTable({ data }) {
             <th>#</th>
             <th>Name</th>
             <th>Status</th>
-            <th>Measurement</th>
+            <th>{' '}</th>
             <th>History</th>
           </tr>
         </thead>

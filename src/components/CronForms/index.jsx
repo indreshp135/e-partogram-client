@@ -104,7 +104,56 @@ export function CronForm() {
   const { request } = useLoading();
 
   const form = useForm({
-    initialValues
+    initialValues,
+    validate: (values) => {
+      const errors = {};
+      if (active === 0) {
+        if (values.foetalHeartRate === '') {
+          errors.foetalHeartRate = 'Please enter foetal heart rate';
+        }
+        if (values.contraction.contraction_rate === '') {
+          errors.contraction = {
+            contraction_rate: 'Please enter contraction rate'
+          };
+        }
+        if (values.contraction.contraction_duration === '') {
+          errors.contraction = {
+            contraction_duration: 'Please enter contraction duration'
+          };
+        }
+        if (values.temperature === '') {
+          errors.temperature = 'Please enter temperature';
+        }
+      } else if (active === 1) {
+        if (values.pulse === '') {
+          errors.pulse = 'Please enter pulse';
+        }
+        if (values.systolic === '') {
+          errors.systolic = 'Please enter systolic';
+        }
+        if (values.diastolic === '') {
+          errors.diastolic = 'Please enter diastolic';
+        }
+      } else if (active === 2) {
+        if (values.oxytocin.dose === '') {
+          errors.oxytocin = {
+            dose: 'Please enter oxytocin dose'
+          };
+        }
+        if (values.oxytocin.drops === '') {
+          errors.oxytocin = {
+            drops: 'Please enter oxytocin drops'
+          };
+        }
+      } else if (active === 3) {
+        if (values.urine.volume === '') {
+          errors.urine = {
+            volume: 'Please enter urine volume'
+          };
+        }
+      }
+      return errors;
+    }
   });
 
   const handleSubmit = async () => {

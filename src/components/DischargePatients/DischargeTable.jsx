@@ -82,13 +82,6 @@ export function PatientTable() {
           </Text>
         </Link>
       </td>
-      <td
-        style={{
-          color: row.critical > 3 ? 'red' : row.critical < 1 ? 'green' : 'orange'
-        }}
-      >
-        {row.critical > 3 ? 'Critical' : row.critical < 1 ? 'Normal' : 'Moderate'}
-      </td>
       <td>
         <Anchor
           color="yellow"
@@ -143,7 +136,6 @@ export function PatientTable() {
             <tr>
               <th>#</th>
               <th>Name</th>
-              <th>Status</th>
               <th>Discharge</th>
               <th>Transfer</th>
             </tr>

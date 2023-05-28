@@ -37,7 +37,10 @@ export function AuthProvider({ children }) {
   };
 
   const setupFCM = async (token) => {
-    const fcmToken = await getFCMToken();
+    let fcmToken = await getFCMToken();
+    if (localStorage.getItem('notifyToken')) {
+      fcmToken = localStorage.getItem('notifyToken');
+    }
     if (fcmToken) {
       try {
         const response = await request(() => fcmTokenRequest({ token, fcmToken }));

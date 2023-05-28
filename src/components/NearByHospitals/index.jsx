@@ -6,7 +6,7 @@ import {
   DirectionsRenderer
 } from '@react-google-maps/api';
 import {
-  Badge, Button, Card, Center, createStyles, Flex, Group, Loader, Text, Title
+  Badge, Button, Card, Center, createStyles, Flex, Group, Loader, Text, Title, Modal, Stack, Switch
 } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { API_KEY } from '../../config';
@@ -60,6 +60,7 @@ export function NearByHospitals() {
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [user] = useLocalStorage('user', null);
   const [center, setCenter] = useState();
+  const [showModal, setShowModal] = useState(true);
   const getNearByHospitals = async () => {
     try {
       const response = await request(() => getNearbyHospitalsRequest(user.token));
@@ -117,151 +118,165 @@ export function NearByHospitals() {
   }
   if (!res.nearby) return <Text> </Text>;
   return (
-    <Flex style={{ overflow: 'hidden' }} width="100%" height="90vh" direction="column">
-      <Flex
-        width="100%"
-        height="100%"
-        sx={{
-          flexDirection: 'row',
-          '@media (max-width: 900px)': {
-            flexDirection: 'column',
-            overflow: 'hidden'
-          }
-        }}
+    <>
+      <Modal
+        opened={showModal}
+        centered
+        onClose={() => setShowModal(false)}
+        title="Reason For Transferring"
       >
-        <GoogleMap
-          flex={1}
-          center={center}
-          zoom={15}
-          mapContainerStyle={{ width: '100%', height: '40vh' }}
-          options={{
-            zoomControl: false,
-            streetViewControl: false,
-            mapTypeControl: false,
-            fullscreenControl: false
-          }}
-          onLoad={(mp) => setMap(mp)}
-        >
-          <Marker position={center} />
-          {directionsResponse && (
-            <DirectionsRenderer directions={directionsResponse} />
-          )}
-        </GoogleMap>
+        <Stack spacing="xs">
+          <Switch
+            label="Specialist Needed"
+          />
+          <Switch
+            label="Cesaerian Section Needed"
+          />
+          <Button onClick={() => setShowModal(false)}>
+            Set
+          </Button>
+        </Stack>
+      </Modal>
+      <Flex style={{ overflow: 'hidden' }} width="100%" height="90vh" direction="column">
         <Flex
-          justify="flex-start"
-          flex={1}
           width="100%"
+          height="100%"
           sx={{
-            padding: '0 1rem',
-            flexDirection: 'column'
+            flexDirection: 'row',
+            '@media (max-width: 900px)': {
+              flexDirection: 'column',
+              overflow: 'hidden'
+            }
           }}
         >
-          <Card
-            sx={{
-              margin: '0 0 1rem 0',
-              width: '20rem',
-              '@media (max-width: 900px)': {
-                margin: '1rem 0rem',
-                width: '100%'
-              }
+          <GoogleMap
+            flex={1}
+            center={center}
+            zoom={15}
+            mapContainerStyle={{ width: '100%', height: '40vh' }}
+            options={{
+              zoomControl: false,
+              streetViewControl: false,
+              mapTypeControl: false,
+              fullscreenControl: false
             }}
-            radius="md"
-            withBorder
+            onLoad={(mp) => setMap(mp)}
           >
-
-            <Group position="apart" mt="md" mb="xs">
-              <Text weight={500}>{res.name}</Text>
-              <Badge color="pink" variant="light">
-                {`Tier: ${res.tier}`}
-              </Badge>
-            </Group>
-
-            <Text size="sm" color="dimmed" mt="md" mb="xs">
-              {`Accomadation Capacity: ${res.capacity}`}
-            </Text>
-
-            <Button
-              onClick={() => {
-                notifications.show({
-                  title: 'Success',
-                  color: 'teal',
-                  message: 'Patient Transfer Successfull'
-                });
+            <Marker position={center} />
+            {directionsResponse && (
+              <DirectionsRenderer directions={directionsResponse} />
+            )}
+          </GoogleMap>
+          <Flex
+            justify="flex-start"
+            flex={1}
+            width="100%"
+            sx={{
+              padding: '0 1rem',
+              flexDirection: 'column'
+            }}
+          >
+            <Card
+              sx={{
+                margin: '0 0 1rem 0',
+                width: '20rem',
+                '@media (max-width: 900px)': {
+                  margin: '1rem 0rem',
+                  width: '100%'
+                }
               }}
-              type="submit"
-              disabled={select === -1}
-              fullWidth
-              mt="md"
               radius="md"
+              withBorder
             >
-              Transfer Patient
-            </Button>
 
-          </Card>
-          <Card
-            sx={{
-              margin: '1rem 0 0 0',
-              width: '20rem',
-              '@media (max-width: 900px)': {
-                margin: '1rem 0rem',
-                width: '100%'
-              }
-            }}
-            radius="md"
-            withBorder
-          >
-            {select === -1 ? <Text color="dimmed">*Select A Hospital*</Text> : (
+              <Group position="apart" mt="md" mb="xs">
+                <Text weight={500}>{res.name}</Text>
+                <Badge color="pink" variant="light">
+                  {`Tier: ${res.tier}`}
+                </Badge>
+              </Group>
+
+              <Text size="sm" color="dimmed" mt="md" mb="xs">
+                {`Accomadation Capacity: ${res.capacity}`}
+              </Text>
+
+              <Button
+                onClick={() => {
+                  notifications.show({
+                    title: 'Success',
+                    color: 'teal',
+                    message: 'Patient Transfer Successfull'
+                  });
+                }}
+                type="submit"
+                disabled={select === -1}
+                fullWidth
+                mt="md"
+                radius="md"
+              >
+                Transfer Patient
+              </Button>
+
+            </Card>
+            <Card
+              sx={{
+                margin: '1rem 0 0 0',
+                width: '20rem',
+                '@media (max-width: 900px)': {
+                  margin: '1rem 0rem',
+                  width: '100%'
+                }
+              }}
+              radius="md"
+              withBorder
+            >
+              {select === -1 ? <Text color="dimmed">*Select A Hospital*</Text> : (
+                <Group mt="md" mb="xs">
+                  <Text weight={500}>Hospital:</Text>
+                  <Text color="pink" variant="light">
+                    { res.nearby[select].name}
+                  </Text>
+                </Group>
+              )}
               <Group mt="md" mb="xs">
-                <Text weight={500}>Hospital:</Text>
+                <Text weight={500}>Distance:</Text>
                 <Text color="pink" variant="light">
-                  { res.nearby[select].name}
+                  {distance}
                 </Text>
               </Group>
-            )}
-            <Group mt="md" mb="xs">
-              <Text weight={500}>Distance:</Text>
-              <Text color="pink" variant="light">
-                {distance}
-              </Text>
-            </Group>
-
-            <Group mt="md" mb="xs">
-              <Text weight={500}>Duration:</Text>
-              <Text color="pink" variant="light">
-                {duration}
-              </Text>
-            </Group>
-          </Card>
+              <Group mt="md" mb="xs">
+                <Text weight={500}>Duration:</Text>
+                <Text color="pink" variant="light">
+                  {duration}
+                </Text>
+              </Group>
+            </Card>
+          </Flex>
         </Flex>
+        <Center mt={40}>
+          <Title order={3}>
+            Nearby Hospitals
+          </Title>
+        </Center>
+        <div className={classes.row}>
+          {res.nearby.map((item, index) => (
+            <Card className={classes.card} radius="md" withBorder>
+              <Group position="apart" mt="md" mb="xs">
+                <Text weight={500}>{item.name}</Text>
+                <Badge color="pink" variant="light">
+                  {`Tier: ${item.tier}`}
+                </Badge>
+              </Group>
+              <Text size="sm" color="dimmed">
+                {`Accomadation Capacity: ${item.capacity}`}
+              </Text>
+              <Button onClick={() => calculateRoute(index)} variant="light" color="blue" fullWidth mt="md" radius="md">
+                Show On Map
+              </Button>
+            </Card>
+          ))}
+        </div>
       </Flex>
-      <Center mt={40}>
-        <Title order={3}>
-          Nearby Hospitals
-        </Title>
-      </Center>
-      <div className={classes.row}>
-        {res.nearby.map((item, index) => (
-          <Card className={classes.card} radius="md" withBorder>
-
-            <Group position="apart" mt="md" mb="xs">
-              <Text weight={500}>{item.name}</Text>
-              <Badge color="pink" variant="light">
-                {`Tier: ${item.tier}`}
-              </Badge>
-            </Group>
-
-            <Text size="sm" color="dimmed">
-              {`Accomadation Capacity: ${item.capacity}`}
-            </Text>
-
-            <Button onClick={() => calculateRoute(index)} variant="light" color="blue" fullWidth mt="md" radius="md">
-              Show On Map
-            </Button>
-          </Card>
-        ))}
-
-      </div>
-
-    </Flex>
+    </>
   );
 }
