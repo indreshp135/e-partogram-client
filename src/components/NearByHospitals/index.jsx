@@ -192,7 +192,7 @@ export function NearByHospitals() {
               <Group position="apart" mt="md" mb="xs">
                 <Text weight={500}>{res.name}</Text>
                 <Badge color="pink" variant="light">
-                  {`Tier: ${res.tier}`}
+                  {res.tier === 1 ? 'PHC' : 'UHC'}
                 </Badge>
               </Group>
 
@@ -264,7 +264,7 @@ export function NearByHospitals() {
               <Group position="apart" mt="md" mb="xs">
                 <Text weight={500}>{item.name}</Text>
                 <Badge color="pink" variant="light">
-                  {`Tier: ${item.tier}`}
+                  {item.tier === 1 ? 'PHC' : 'UHC'}
                 </Badge>
               </Group>
               <Text size="sm" color="dimmed">
