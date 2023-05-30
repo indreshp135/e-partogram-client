@@ -241,6 +241,34 @@ export const drawCervix = (ctx, dataPointsMock) => {
     ctx.stroke();
   }
 
+  ctx.lineWidth = 5;
+  const ALERT_START_X = GRAPH_START_X + 8 * 30;
+  const ALERT_START_Y = CERVIX_GRAPH_START_Y + 40 * 7;
+
+  const ALERT_END_X = GRAPH_START_X + 15 * 30;
+  const ALERT_END_Y = CERVIX_GRAPH_START_Y;
+
+  ctx.beginPath();
+  ctx.moveTo(ALERT_START_X, ALERT_START_Y);
+  ctx.lineTo(ALERT_END_X, ALERT_END_Y);
+  ctx.stroke();
+
+  // ctx.beginPath();
+  // ctx.moveTo(GRAPH_START_X, ALERT_START_Y);
+  // ctx.lineTo(ALERT_START_X, ALERT_START_Y);
+  // ctx.stroke();
+
+  // ctx.beginPath();
+  // ctx.moveTo(ALERT_START_X, ALERT_START_Y);
+  // ctx.lineTo(ALERT_START_X, ALERT_START_Y + 40 * 3);
+  // ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(ALERT_START_X + 4 * 30, ALERT_START_Y);
+  ctx.lineTo(ALERT_END_X + 4 * 30, ALERT_END_Y);
+  ctx.stroke();
+
+  ctx.lineWidth = 1;
   for (let i = 0; i < 25 / 2; i += 1) {
     ctx.beginPath();
     ctx.moveTo(GRAPH_START_X + i * 60, CERVIX_GRAPH_START_Y);
