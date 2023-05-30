@@ -150,7 +150,7 @@ export const drawFetalHeartRate = (ctx, dataPointsMock) => {
   ctx.textAlign = 'start';
 
   ctx.textBaseline = 'middle';
-  for (let i = 0; i < 25; i += 1) {
+  for (let i = 0; i < 25; i += 0.5) {
     ctx.beginPath();
     ctx.moveTo(GRAPH_START_X + i * 30, FETAL_HEART_RATE_GRAPH_START_Y);
     ctx.lineTo(GRAPH_START_X + i * 30, FETAL_HEART_RATE_GRAPH_START_Y + 240);
@@ -454,7 +454,7 @@ export const drawOxytocinDrops = (ctx, dataPointsMock) => {
   ctx.font = '15px Arial';
   ctx.textBaseline = 'middle';
   ctx.textAlign = 'start';
-  for (let i = 0; i < 25; i += 1) {
+  for (let i = 0; i < 25; i += 0.5) {
     ctx.beginPath();
     ctx.moveTo(GRAPH_START_X + i * 30, OXYTOCIN_GRAPH_START_Y);
     ctx.lineTo(GRAPH_START_X + i * 30, OXYTOCIN_GRAPH_START_Y + 40);
@@ -517,7 +517,7 @@ export const drawDrugDrops = (ctx, dataPointsMock) => {
   ctx.fillText('and IV', GRAPH_START_X - 5, DRUG_GRAPH_START_Y + 80);
   ctx.fillText('Fluids', GRAPH_START_X - 5, DRUG_GRAPH_START_Y + 100);
 
-  for (let i = 0; i < 25; i += 1) {
+  for (let i = 0; i < 25; i += 0.5) {
     ctx.beginPath();
     ctx.moveTo(GRAPH_START_X + i * 30, DRUG_GRAPH_START_Y + 160);
     ctx.lineTo(GRAPH_START_X + i * 30, DRUG_GRAPH_START_Y + 160 + 20 * 12);
