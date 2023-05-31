@@ -227,7 +227,7 @@ export function CronForm() {
               </Stack>
             </Box>
           </Stepper.Step>
-          <Stepper.Step description="30 Minutes" label="Pulses and Oxytocin">
+          <Stepper.Step description="30 Minutes" label="Pulse rate and Oxytocin">
             <Box className={classes.box}>
               <Stack
                 spacing="md"

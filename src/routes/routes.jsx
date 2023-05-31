@@ -7,7 +7,6 @@ import { LandingPageContainer } from '../containers/LandingPageContainer';
 import { Homepage } from '../components/Home';
 import { PatientData } from '../components/PatientAdmission';
 import { CronForm } from '../components/CronForms';
-import { CanvasChart } from '../components/Chart';
 import { NearByHospitals } from '../components/NearByHospitals';
 import { AddStaff } from '../components/AddStaff';
 import { AddHospital } from '../components/AddHospital';
@@ -31,7 +30,7 @@ export const publicRoutes = [
 export const privateRoutes = [
   {
     url: '/home',
-    component: <GeneralPageContainer child={<Homepage />} name="HomePage" />,
+    component: <GeneralPageContainer child={<Homepage />} name="Dashboard" />,
     name: 'HomePageContainer',
     label: 'home'
   },
@@ -49,7 +48,7 @@ export const privateRoutes = [
   },
   {
     url: '/patient-history/:id',
-    component: <GeneralPageContainer child={<CanvasChart />} name="PatientHistoryPage" />,
+    component: <GeneralPageContainer child={<RisksAndSuggestions />} name="PatientHistoryPage" />,
     name: 'PatientHistoryPageContainer',
     label: 'patient-history'
   },
@@ -82,11 +81,5 @@ export const privateRoutes = [
     component: <GeneralPageContainer child={<ReportStaff />} name="ReportStaffContainer" />,
     name: 'ReportStaffContainer',
     label: 'Staff On Duty'
-  },
-  {
-    url: '/patient-risks/:id',
-    component: <GeneralPageContainer child={<RisksAndSuggestions />} name="RisksAndSuggestionsContainer" />,
-    name: 'RisksAndSuggestionsContainer',
-    label: 'Risks & Suggestions'
   }
 ];

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import {
-  createStyles, Container, Paper,
-  Title, Center
+  createStyles, Container,
+  Title, Center, SimpleGrid
 } from '@mantine/core';
 import '@lottiefiles/lottie-player';
 import { StatsControls } from './Stats';
-import { PatientTable } from './PatientTable';
 
 import { useLoading } from '../../hooks/useLoading';
 import { listPatientsRequest } from '../../utils/requests';
+import { PatientCard } from './Card';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -88,10 +88,16 @@ export function Homepage() {
             Patient Details
           </Title>
         </Center>
-        <Paper>
-
-          <PatientTable data={data} />
-        </Paper>
+        <SimpleGrid cols={3} breakpoints={[{ maxWidth: 'sm', cols: 1 }, { maxWidth: 'md', cols: 2 }]}>
+          {data.map((patient, ind) => (
+            <PatientCard
+              name={patient.name}
+              critical={patient.critical}
+              index={ind}
+              id={patient.id}
+            />
+          ))}
+        </SimpleGrid>
       </Container>
 
     </div>

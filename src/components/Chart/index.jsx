@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import {
-  Center,
-  Container, Image, Flex, Title, useMantineTheme, Button
+  Container, Image, useMantineTheme
 } from '@mantine/core';
 import { useParams } from 'react-router-dom';
 import {
@@ -79,25 +78,8 @@ export function CanvasChart() {
     getData();
   }, [canvas]);
 
-  const downloadAsImage = () => {
-    const link = document.createElement('a');
-    link.download = 'partogram.png';
-    link.href = imageSrc;
-    link.click();
-  };
-
   return (
     <>
-      <Center>
-        <Title order={2}>Patient Partogram</Title>
-      </Center>
-      <Flex
-        direction={{ base: 'column', sm: 'row' }}
-        gap={{ base: 'sm', sm: 'lg' }}
-        justify={{ xs: 'end' }}
-      >
-        <Button onClick={downloadAsImage}>Download Partogram</Button>
-      </Flex>
       <canvas
         ref={canvas}
         height={height}

@@ -185,6 +185,15 @@ export function StatsControls({ statData }) {
   );
 }
 
+StatsControls.defaultProps = {
+  statData: {
+    Patient: 0,
+    Normal: 0,
+    Monitored: 0,
+    Critical: 0
+  }
+};
+
 StatsControls.propTypes = {
   statData: PropTypes.shape(
     {
@@ -193,5 +202,5 @@ StatsControls.propTypes = {
       Monitored: PropTypes.number.isRequired,
       Critical: PropTypes.number.isRequired
     }
-  ).isRequired
+  )
 };
