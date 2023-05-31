@@ -24,18 +24,18 @@ const useStyles = createStyles((theme) => ({
 
 const FAQ = [
   {
-    question: 'What is E-Partogram?',
-    answer: ' E-Partogram is a digital solution that provides healthcare providers with real-time monitoring, automated calculations, decision support, secure data management, and customizable settings for maternal and fetal monitoring during labor.',
+    question: 'What is ePartogram?',
+    answer: ' ePartogram is a digital solution that provides healthcare providers with real-time monitoring, automated calculations, decision support, secure data management, and customizable settings for maternal and fetal monitoring during labor.',
     value: 'what'
   },
   {
-    question: 'How does E-Partogram work?',
-    answer: 'E-Partogram works by capturing maternal and fetal parameters such as cervical dilation, fetal heart rate, contractions, and more. The software then analyzes this data in real-time, providing alerts and prompts to healthcare providers based on predefined thresholds.',
+    question: 'How does ePartogram work?',
+    answer: 'ePartogram works by capturing maternal and fetal parameters such as cervical dilation, fetal heart rate, contractions, and more. The software then analyzes this data in real-time, providing alerts and prompts to healthcare providers based on predefined thresholds.',
     value: 'how'
   },
   {
-    question: 'Who can use E-Partogram?',
-    answer: 'E-Partogram can be used by healthcare providers, such as obstetricians, midwives, and nurses, who are involved in maternal and fetal monitoring during labor.',
+    question: 'Who can use ePartogram?',
+    answer: 'ePartogram can be used by healthcare providers, such as obstetricians, midwives, and nurses, who are involved in maternal and fetal monitoring during labor.',
     value: 'who'
   }
 

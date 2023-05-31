@@ -72,7 +72,7 @@ export function AddHospital() {
         <Center>
           <Title order={2}>Update Hospital Details</Title>
         </Center>
-        <Stack spacing="md" p={20}>
+        <Stack spacing="md" py={20}>
           <TextInput
             label="Name"
             placeholder="Enter name of hospital"

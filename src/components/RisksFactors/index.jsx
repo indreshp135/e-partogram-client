@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Container, Tabs, Timeline, Text, Center
+  Container, Tabs, Timeline, Text
 } from '@mantine/core';
 import { useParams } from 'react-router-dom';
 import { useLoading } from '../../hooks/useLoading';
@@ -28,43 +28,43 @@ export function RisksAndSuggestions() {
           <Tabs.Tab value="first">Risks</Tabs.Tab>
           <Tabs.Tab value="second">Suggestions</Tabs.Tab>
         </Tabs.List>
-        <Tabs.Panel value="first">
-          <Center m={20}>
-            <Timeline active={1} bulletSize={24} lineWidth={2}>
-              {risks.map((risk) => (
-                <Timeline.Item
-                  key={risk.timeStamp}
-                  title={(new Date(risk.timeStamp).toLocaleString()).toString()}
-                >
-                  {
-                    risk.risks.length === 0 ? <Text color="dimmed" size="sm">No risks</Text>
-                      : risk.risks.map((r) => (
-                        <Text color="red" size="sm" key={r}>{r}</Text>
-                      ))
-                  }
-                </Timeline.Item>
-              ))}
-            </Timeline>
-          </Center>
+        <Tabs.Panel value="first" py={20}>
+          <Timeline
+            active={1}
+            bulletSize={24}
+            lineWidth={2}
+          >
+            {risks.map((risk) => (
+              <Timeline.Item
+                key={risk.timeStamp}
+                title={(new Date(risk.timeStamp).toLocaleString('en-IN')).toString()}
+              >
+                {
+                  risk.risks.length === 0 ? <Text color="dimmed" size="md">No risks</Text>
+                    : risk.risks.map((r) => (
+                      <Text color="red" size="md" key={r}>{r}</Text>
+                    ))
+                }
+              </Timeline.Item>
+            ))}
+          </Timeline>
         </Tabs.Panel>
-        <Tabs.Panel value="second">
-          <Center m={20}>
-            <Timeline active={1} bulletSize={24} lineWidth={2}>
-              {suggestions.map((risk) => (
-                <Timeline.Item
-                  key={risk.timeStamp}
-                  title={(new Date(risk.timeStamp).toLocaleString()).toString()}
-                >
-                  {
-                    risk.suggestions.length === 0 ? <Text color="dimmed" size="sm">No suggestions</Text>
-                      : risk.suggestions.map((r) => (
-                        <Text color="yellow" size="sm" key={r}>{r}</Text>
-                      ))
-                  }
-                </Timeline.Item>
-              ))}
-            </Timeline>
-          </Center>
+        <Tabs.Panel value="second" py={20}>
+          <Timeline active={1} bulletSize={24} lineWidth={2}>
+            {suggestions.map((risk) => (
+              <Timeline.Item
+                key={risk.timeStamp}
+                title={(new Date(risk.timeStamp).toLocaleString()).toString()}
+              >
+                {
+                  risk.suggestions.length === 0 ? <Text color="dimmed" size="md">No suggestions</Text>
+                    : risk.suggestions.map((r) => (
+                      <Text color="yellow" size="md" key={r}>{r}</Text>
+                    ))
+                }
+              </Timeline.Item>
+            ))}
+          </Timeline>
         </Tabs.Panel>
       </Tabs>
     </Container>

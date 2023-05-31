@@ -25,7 +25,11 @@ import { appCheck } from './firebase';
 const getIDToken = async () => {
   const idToken = localStorage.getItem('firebase-id-token');
   if (idToken) {
-    return idToken;
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(idToken);
+      }, 0);
+    });
   }
   return null;
 };

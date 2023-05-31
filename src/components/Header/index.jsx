@@ -2,13 +2,14 @@ import React from 'react';
 import {
   createStyles, Header, Container, Group, UnstyledButton, Text, Center,
   useMantineColorScheme, Burger, Paper, MediaQuery, useMantineTheme
+  // Transition
 } from '@mantine/core';
 import { IconMoon, IconSun } from '@tabler/icons';
 import PropTypes from 'prop-types';
 import { useLocation, useNavigate } from 'react-router-dom';
-import logo from './logo.png';
+import logo from './logo-new.png';
 
-const HEADER_HEIGHT = 80;
+const HEADER_HEIGHT = 60;
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -36,6 +37,7 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     height: '100%',
+    padding: 0,
     [theme.fn.largerThan('sm')]: {
       justifyContent: 'space-between'
     }
@@ -140,9 +142,14 @@ export function HeaderNav({ opened: open, setOpened }) {
       <Container className={classes.header}>
         {open
         && (
+
+          // <Transition duration={200} mounted={open} transition="fade" timingFunction="ease">
+          //   {(styles) => (
           <Paper className={classes.dropdown} withBorder>
             {items}
           </Paper>
+          //  )}
+          // </Transition>
         ) }
         {(location.pathname !== '/' && location.pathname !== '/auth')
         && (
@@ -157,7 +164,7 @@ export function HeaderNav({ opened: open, setOpened }) {
           </MediaQuery>
         ) }
         <UnstyledButton className={classes.flexer} onClick={() => navigate('/')}>
-          <img src={logo} height={70} alt="logo" />
+          <img src={logo} height={40} alt="logo" />
         </UnstyledButton>
         <Group spacing={5} className={classes.links}>
           {items}

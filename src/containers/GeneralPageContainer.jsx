@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   AppShell,
-  useMantineTheme, ScrollArea
+  useMantineTheme
 } from '@mantine/core';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
@@ -23,7 +23,11 @@ export function GeneralPageContainer({ child, name }) {
     <AppShell
       styles={{
         main: {
-          background: theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[1]
+          background: theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[1],
+          height: '100%',
+          '& > *': {
+            height: '100%'
+          }
         }
       }}
       navbarOffsetBreakpoint="xs"
@@ -34,9 +38,15 @@ export function GeneralPageContainer({ child, name }) {
         <HeaderNav opened={opened} setOpened={setOpened} />
       }
     >
-      <ScrollArea style={{ height: window.innerHeight - 120 }}>
+      <div style={{
+        height: '100%',
+        '& > *': {
+          height: '100%'
+        }
+      }}
+      >
         {child}
-      </ScrollArea>
+      </div>
     </AppShell>
   );
 }

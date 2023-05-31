@@ -3,6 +3,7 @@ import {
   createStyles, Navbar, UnstyledButton,
   ActionIcon, Select,
   useMantineColorScheme, Center, getStylesRef, rem
+  // Transition
 } from '@mantine/core';
 import {
   IconLogout,
@@ -141,19 +142,19 @@ export function NavBar({ opened, setOpened }) {
       }}
     >
       <item.icon className={classes.linkIcon} stroke={1.5} />
-      <span>{item.label.toUpperCase()}</span>
+      <span>{item.name}</span>
     </Link>
   ));
 
   return (
+    // <Transition duration={200} mounted={opened} transition="fade" timingFunction="ease">
+    //   {(styles) => (
     <Navbar
       p="md"
       hiddenBreakpoint="sm"
       hidden={!opened}
       width={{ sm: 260 }}
-      style={{
-        zIndex: 1
-      }}
+      style={{ zIndex: 2 }}
     >
       <Navbar.Section grow>
         {links}
@@ -198,6 +199,8 @@ export function NavBar({ opened, setOpened }) {
         </UnstyledButton>
       </Navbar.Section>
     </Navbar>
+    //   )}
+    // </Transition>
   );
 }
 

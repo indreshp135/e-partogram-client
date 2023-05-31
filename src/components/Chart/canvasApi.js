@@ -104,7 +104,7 @@ export const drawHeader = (ctx, width, {
   membraneRuptureTime
 }) => {
   if (ctx) {
-    ctx.font = '15px Arial';
+    ctx.font = '14px Arial';
 
     const row1XStart = 50;
     const row1YStart = 50;
@@ -128,10 +128,10 @@ export const drawHeader = (ctx, width, {
     ctx.fillText(`NND: ${nnd}`, row2XStart + gapForColumns5 * 3, row2YStart);
     console.log(abortion);
 
-    ctx.fillText(`EDD: ${edd}`, row3XStart, row3YStart);
-    ctx.fillText(`Contraction Start: ${contractionStartTime}`, row3XStart + gapForColumns3, row3YStart);
+    ctx.fillText(`EDD: ${(new Date(edd)).toLocaleString('en-IN')}`, row3XStart, row3YStart);
+    ctx.fillText(`Contraction Start: ${(new Date(contractionStartTime)).toLocaleString('en-IN')}`, row3XStart + gapForColumns3, row3YStart);
 
-    if (membraneRuptureTime) { ctx.fillText(`Membrane Rupture Start: ${membraneRuptureTime}`, row3XStart + 2 * gapForColumns3, row3YStart); }
+    if (membraneRuptureTime) { ctx.fillText(`Membrane Rupture Start: ${(new Date(contractionStartTime)).toLocaleString('en-IN')}`, row3XStart + 2 * gapForColumns3, row3YStart); }
 
     ctx.beginPath();
     ctx.moveTo(50, 100);
@@ -150,12 +150,14 @@ export const drawFetalHeartRate = (ctx, dataPointsMock) => {
   ctx.textAlign = 'start';
 
   ctx.textBaseline = 'middle';
-  for (let i = 0; i < 25; i += 0.5) {
+  for (let i = 0; i <= 24; i += 0.5) {
     ctx.beginPath();
     ctx.moveTo(GRAPH_START_X + i * 30, FETAL_HEART_RATE_GRAPH_START_Y);
     ctx.lineTo(GRAPH_START_X + i * 30, FETAL_HEART_RATE_GRAPH_START_Y + 240);
     ctx.stroke();
-    ctx.fillText(i, GRAPH_START_X + i * 30 - 5, FETAL_HEART_RATE_GRAPH_START_Y - 10);
+    if ((i * 2) % 2 === 0) {
+      ctx.fillText(i, GRAPH_START_X + i * 30 - 5, FETAL_HEART_RATE_GRAPH_START_Y - 10);
+    }
   }
 
   ctx.textBaseline = 'bottom';

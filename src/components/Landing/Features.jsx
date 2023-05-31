@@ -17,13 +17,13 @@ export const FEATURES = [
     icon: IconReportAnalytics,
     title: 'Real-Time Data Visualization',
     description:
-        'E-Partogram allows doctors and nurses to monitor and visualize maternal and fetal data in real-time, ensuring prompt interventions when needed.'
+        'ePartogram allows doctors and nurses to monitor and visualize maternal and fetal data in real-time, ensuring prompt interventions when needed.'
   },
   {
     icon: IconCalculatorOff,
     title: 'Automated Calculations',
     description:
-        'With E-Partogram, all necessary calculations such as cervical dilatation, fetal heart rate, and uterine contractions are done automatically, reducing the risk of errors and saving time.'
+        'With ePartogram, all necessary calculations such as cervical dilatation, fetal heart rate, and uterine contractions are done automatically, reducing the risk of errors and saving time.'
   },
   {
     icon: IconEye,

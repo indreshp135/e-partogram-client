@@ -65,7 +65,7 @@ export function PatientTable({ data }) {
           <Text
             color="teal"
           >
-            Add
+            Add Measurement
           </Text>
         </Link>
       </td>
@@ -94,7 +94,7 @@ export function PatientTable({ data }) {
             <th>#</th>
             <th>Name</th>
             <th>Status</th>
-            <th>{' '}</th>
+            <th>Measurement</th>
             <th>History</th>
           </tr>
         </thead>

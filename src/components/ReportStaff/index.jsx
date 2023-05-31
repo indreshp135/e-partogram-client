@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import {
   createStyles, Container, Text,
-  Title, Center, rem, Switch
+  Title, rem, Switch
 } from '@mantine/core';
 import '@lottiefiles/lottie-player';
 import { notifications } from '@mantine/notifications';
@@ -75,12 +75,10 @@ export function ReportStaff() {
   }, []);
   return (
     <div className={classes.root}>
-      <Container>
-        <Center mt={40}>
-          <Title className={classes.title} order={3}>
-            Staff On Duty
-          </Title>
-        </Center>
+      <Container px={0}>
+        <Title className={classes.title} order={3}>
+          Staff On Duty
+        </Title>
         {
           data.map((item) => (
             <div

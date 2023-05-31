@@ -60,3 +60,13 @@ html,
 body {
   overscroll-behavior-y: contain;
 }
+
+#google_translate_element {
+  height: 0;
+  visibility: hidden;
+}
+
+.firebase-emulator-warning {
+  opacity: 0.4;
+  pointer-events: none;
+}

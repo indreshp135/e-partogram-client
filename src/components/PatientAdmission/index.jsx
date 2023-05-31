@@ -14,7 +14,6 @@ import {
   Box,
   createStyles,
   Select,
-  ScrollArea,
   Textarea
 } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
@@ -27,7 +26,7 @@ const useStyles = createStyles((theme) => ({
       theme.colorScheme === 'dark'
         ? theme.colors.dark[6]
         : theme.colors.gray[0],
-    padding: theme.spacing.xl,
+    padding: theme.spacing.md,
     borderRadius: theme.radius.md,
     cursor: 'pointer'
   }
@@ -108,9 +107,7 @@ export function PatientData() {
   return (
     <Container size="xl">
       <Stack>
-        <Group position="center" my="md">
-          <Title order={1}>Add New Patient</Title>
-        </Group>
+        <Title order={3}>Add New Patient</Title>
 
         <Stepper
           active={active}
@@ -120,169 +117,156 @@ export function PatientData() {
           styles={{
             separator: {
               backgroundColor: theme.colorScheme === 'dark' ? 'white' : 'black'
+            },
+            stepIcon: {
+              borderColor: theme.colorScheme === 'dark' ? 'white' : 'black'
+            },
+            steps: {
+              paddingBlock: '20px'
             }
           }}
         >
           <Stepper.Step label="Step 1" description="Add patient details">
-            <ScrollArea style={{ height: 350 }}>
-              <Box className={classes.box}>
-                <Stack
-                  spacing="md"
-                  justify="center"
-                  align="stretch"
-                  sx={{
-                    height: 300,
-                    padding: '0 20px'
-                  }}
-                >
-                  <TextInput
-                    label="Name"
-                    withAsterisk
-                    {...form.getInputProps('name')}
-                    placeholder="Enter name"
-                  />
-                  <NumberInput
-                    label="Age"
-                    withAsterisk
-                    {...form.getInputProps('age')}
-                    placeholder="Enter age"
-                  />
-                  <NumberInput
-                    label="Height"
-                    withAsterisk
-                    {...form.getInputProps('height')}
-                    placeholder="Enter height"
-                  />
-                </Stack>
-              </Box>
-            </ScrollArea>
+            <Box className={classes.box}>
+              <Stack
+                spacing="md"
+                justify="center"
+                align="stretch"
+              >
+                <TextInput
+                  label="Name"
+                  withAsterisk
+                  {...form.getInputProps('name')}
+                  placeholder="Enter name"
+                />
+                <NumberInput
+                  label="Age"
+                  withAsterisk
+                  {...form.getInputProps('age')}
+                  placeholder="Enter age"
+                />
+                <NumberInput
+                  label="Height"
+                  withAsterisk
+                  {...form.getInputProps('height')}
+                  placeholder="Enter height"
+                />
+              </Stack>
+            </Box>
           </Stepper.Step>
           <Stepper.Step label="Step 2" description="Medical History">
-            <ScrollArea style={{ height: 350 }}>
-              <Box className={classes.box}>
-                <Stack
-                  spacing="md"
-                  justify="center"
-                  align="stretch"
-                  sx={{
-                    minHeight: 300,
-                    padding: '0 20px'
-                  }}
-                >
-                  <NumberInput
-                    label="Parity"
-                    withAsterisk
-                    {...form.getInputProps('parity')}
-                  />
-                  <NumberInput
-                    label="Alive Children"
-                    withAsterisk
-                    {...form.getInputProps('alive')}
-                  />
-                  <NumberInput
-                    label="Still Births"
-                    withAsterisk
-                    {...form.getInputProps('sb')}
-                  />
-                  <NumberInput
-                    label="Neonatal Deaths"
-                    withAsterisk
-                    {...form.getInputProps('nnd')}
-                  />
-                  <DatePickerInput
-                    mt="md"
-                    popoverProps={{ withinPortal: true }}
-                    label="Expected Date of Delivery"
-                    placeholder="When is the expected date of delivery?"
-                    classNames={classes}
-                    clearable={false}
-                    {...form.getInputProps('edd')}
-                  />
-                </Stack>
-              </Box>
-            </ScrollArea>
+            <Box className={classes.box}>
+              <Stack
+                spacing="md"
+                justify="center"
+                align="stretch"
+              >
+                <NumberInput
+                  label="Parity"
+                  withAsterisk
+                  {...form.getInputProps('parity')}
+                />
+                <NumberInput
+                  label="Alive Children"
+                  withAsterisk
+                  {...form.getInputProps('alive')}
+                />
+                <NumberInput
+                  label="Still Births"
+                  withAsterisk
+                  {...form.getInputProps('sb')}
+                />
+                <NumberInput
+                  label="Neonatal Deaths"
+                  withAsterisk
+                  {...form.getInputProps('nnd')}
+                />
+                <DatePickerInput
+                  popoverProps={{ withinPortal: true }}
+                  label="Expected Date of Delivery"
+                  placeholder="When is the expected date of delivery?"
+                  classNames={classes}
+                  clearable={false}
+                  {...form.getInputProps('edd')}
+                />
+              </Stack>
+            </Box>
           </Stepper.Step>
           <Stepper.Step label="Step 3" description="Recent History">
-            <ScrollArea style={{ height: 350 }}>
-              <Box className={classes.box}>
-                <Stack
-                  spacing="md"
-                  justify="center"
-                  align="stretch"
-                  sx={{
-                    minHeight: 300,
-                    padding: '0 20px'
-                  }}
-                >
-                  <Textarea
-                    label="Risk Factors"
-                    {...form.getInputProps('riskFactors')}
-                    placeholder="Enter risk factors"
-                  />
-                  <DateTimePicker
-                    mt="md"
-                    popoverProps={{ withinPortal: true }}
-                    label="Contraction Start Time"
-                    placeholder="When did the contractions start?"
-                    classNames={classes}
-                    clearable={false}
-                    {...form.getInputProps('contractionStartTime')}
-                  />
+            <Box className={classes.box}>
+              <Stack
+                spacing="md"
+                justify="center"
+                align="stretch"
+              >
+                <Textarea
+                  label="Risk Factors"
+                  {...form.getInputProps('riskFactors')}
+                  placeholder="Enter risk factors"
+                />
+                <DateTimePicker
+                  popoverProps={{ withinPortal: true }}
+                  label="Contraction Start Time"
+                  placeholder="When did the contractions start?"
+                  classNames={classes}
+                  clearable={false}
+                  {...form.getInputProps('contractionStartTime')}
+                />
 
-                  <DateTimePicker
-                    mt="md"
-                    popoverProps={{ withinPortal: true }}
-                    label="Membrane Rupture Time"
-                    placeholder="When did the membrane rupture?"
-                    classNames={classes}
-                    clearable={false}
-                    {...form.getInputProps('membraneRuptureTime')}
-                  />
+                <DateTimePicker
+                  popoverProps={{ withinPortal: true }}
+                  label="Membrane Rupture Time"
+                  placeholder="When did the membrane rupture?"
+                  classNames={classes}
+                  clearable={false}
+                  {...form.getInputProps('membraneRuptureTime')}
+                />
 
-                </Stack>
-              </Box>
-            </ScrollArea>
+              </Stack>
+            </Box>
           </Stepper.Step>
           <Stepper.Step label="Step 4" description="Hospital Details">
-            <ScrollArea style={{ height: 350 }}>
-              <Box className={classes.box}>
-                <Stack
-                  spacing="md"
-                  justify="center"
-                  align="stretch"
-                  sx={{
-                    minHeight: 300,
-                    padding: '0 20px'
-                  }}
-                >
+            <Box className={classes.box}>
+              <Stack
+                spacing="md"
+                justify="center"
+                align="stretch"
+              >
 
-                  <Select
-                    label="Select Doctor"
-                    withAsterisk
-                    data={staffs.doctors}
-                    {...form.getInputProps(
-                      'doctor'
-                    )}
-                  />
-                  <Select
-                    label="Select Nurse"
-                    withAsterisk
-                    data={staffs.nurses}
-                    {...form.getInputProps(
-                      'nurse'
-                    )}
-                  />
-                </Stack>
-              </Box>
-            </ScrollArea>
+                <Select
+                  label="Select Doctor"
+                  withAsterisk
+                  data={staffs.doctors}
+                  {...form.getInputProps(
+                    'doctor'
+                  )}
+                />
+                <Select
+                  label="Select Nurse"
+                  withAsterisk
+                  data={staffs.nurses}
+                  {...form.getInputProps(
+                    'nurse'
+                  )}
+                />
+              </Stack>
+            </Box>
           </Stepper.Step>
         </Stepper>
 
-        <Group position="center" my="md">
+        <Group
+          position="center"
+          my="md"
+          style={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+          }}
+        >
           <Button
             color="blue"
-            my={10}
-            w={100}
+            style={{ flex: 1 }}
             disabled={active === 0}
             onClick={() => {
               if (active > 0) {
@@ -294,8 +278,7 @@ export function PatientData() {
           </Button>
 
           <Button
-            my={10}
-            w={100}
+            style={{ flex: 1 }}
             disabled={active === 4}
             onClick={() => {
               if (active < 3) {

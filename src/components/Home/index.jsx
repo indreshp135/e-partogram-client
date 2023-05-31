@@ -81,14 +81,14 @@ export function Homepage() {
 
   return (
     <div className={classes.root}>
-      <Container>
+      <Container px={0}>
         <StatsControls statData={stat} />
         <Center mt={40}>
           <Title className={classes.title} order={3}>
-            Patients Details
+            Patient Details
           </Title>
         </Center>
-        <Paper m={10}>
+        <Paper>
 
           <PatientTable data={data} />
         </Paper>

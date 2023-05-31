@@ -12,6 +12,8 @@ export const firebaseConfig = {
   measurementId: ''
 };
 
+export const useLocalEmulator = true;
+
 export const appCheckDebugToken = '';
 
 export const recaptchaSiteKey = '';

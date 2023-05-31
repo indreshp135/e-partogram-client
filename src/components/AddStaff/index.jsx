@@ -66,11 +66,9 @@ export function AddStaff() {
   }, []);
 
   return (
-    <Container>
-      <Center>
-        <Title order={2}>Add Staff</Title>
-      </Center>
-      <Stack spacing="md" p={20}>
+    <Container px={0} style={{ display: 'flex', flexDirection: 'column' }}>
+      <Title order={2}>Add Staff</Title>
+      <Stack spacing="md" py={20} style={{ flex: 1 }}>
         <Autocomplete
           label="Select Staff"
           placeholder="Select Staff to add"
@@ -81,6 +79,7 @@ export function AddStaff() {
       <Center>
         <Button
           type="submit"
+          fullWidth
           onClick={handleSubmit}
         >
           Add

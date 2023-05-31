@@ -14,7 +14,11 @@ export function Routers() {
   return (
     <Router>
       <AuthProvider>
-        <LoadingOverlay visible={isLoading} />
+        <LoadingOverlay
+          visible={isLoading}
+          overlayOpacity={1}
+          style={{ position: 'fixed' }}
+        />
         <Switches />
       </AuthProvider>
     </Router>

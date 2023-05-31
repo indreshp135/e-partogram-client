@@ -13,7 +13,6 @@ import {
   Box,
   createStyles,
   Select,
-  ScrollArea,
   Textarea,
   Center,
   SimpleGrid,
@@ -60,9 +59,8 @@ const useStyles = createStyles((theme) => ({
       theme.colorScheme === 'dark'
         ? theme.colors.dark[6]
         : theme.colors.gray[0],
-    padding: theme.spacing.xl,
+    padding: theme.spacing.md,
     borderRadius: theme.radius.md,
-    minHeight: 350,
     cursor: 'pointer'
   }
 }));
@@ -177,221 +175,201 @@ export function CronForm() {
   return (
     <Container size="xl">
       <Stack>
-        <Group position="center" my="md">
-          <Title order={1}>Add Readings</Title>
-        </Group>
+        <Title order={3} mt={20}>Add Readings</Title>
 
         <Stepper
           active={active}
           onStepClick={setActive}
-          breakpoint="xs"
+          breakpoint="xl"
           allowNextStepsSelect={false}
           styles={{
             separator: {
               backgroundColor: theme.colorScheme === 'dark' ? 'white' : 'black'
+            },
+            stepIcon: {
+              borderColor: theme.colorScheme === 'dark' ? 'white' : 'black'
+            },
+            steps: {
+              paddingBlock: '20px'
             }
           }}
         >
           <Stepper.Step description="30 Minutes" label="Vitals">
-            <ScrollArea style={{ height: 350 }}>
-              <Box className={classes.box}>
-                <Stack
-                  spacing="md"
-                  justify="center"
-                  align="stretch"
-                  sx={{
-                    height: 300,
-                    padding: '0 20px'
-                  }}
-                >
-                  <NumberInput
-                    label="Foetal Heart Rate"
-                    {...form.getInputProps('foetalHeartRate')}
-                    placeholder="Enter foetal heart rate"
-                  />
-                  <NumberInput
-                    label="Contraction Rate"
-                    {...form.getInputProps('contraction.contraction_rate')}
-                    placeholder="Enter contraction rate"
-                  />
-                  <NumberInput
-                    label="Contraction Duration"
-                    {...form.getInputProps('contraction.contraction_duration')}
-                    placeholder="Enter contraction duration"
-                  />
-                  <NumberInput
-                    label="Temperature"
-                    {...form.getInputProps('temperature')}
-                    placeholder="Enter temperature"
-                    rightSectionWidth={40}
-                    rightSection={<Kbd>°C</Kbd>}
-                  />
+            <Box className={classes.box}>
+              <Stack
+                spacing="md"
+                justify="center"
+                align="stretch"
+              >
+                <NumberInput
+                  label="Foetal Heart Rate"
+                  {...form.getInputProps('foetalHeartRate')}
+                  placeholder="Enter foetal heart rate"
+                />
+                <NumberInput
+                  label="Contraction Rate"
+                  {...form.getInputProps('contraction.contraction_rate')}
+                  placeholder="Enter contraction rate"
+                />
+                <NumberInput
+                  label="Contraction Duration"
+                  {...form.getInputProps('contraction.contraction_duration')}
+                  placeholder="Enter contraction duration"
+                />
+                <NumberInput
+                  label="Temperature"
+                  {...form.getInputProps('temperature')}
+                  placeholder="Enter temperature"
+                  rightSectionWidth={40}
+                  rightSection={<Kbd>°C</Kbd>}
+                />
 
-                </Stack>
-              </Box>
-            </ScrollArea>
+              </Stack>
+            </Box>
           </Stepper.Step>
           <Stepper.Step description="30 Minutes" label="Pulses and Oxytocin">
-            <ScrollArea style={{ height: 350 }}>
-              <Box className={classes.box}>
-                <Stack
-                  spacing="md"
-                  justify="center"
-                  align="stretch"
-                  sx={{
-                    height: 300,
-                    padding: '0 20px'
-                  }}
-                >
+            <Box className={classes.box}>
+              <Stack
+                spacing="md"
+                justify="center"
+                align="stretch"
+              >
 
-                  <NumberInput
-                    label="Pulse"
-                    {...form.getInputProps('pulse')}
-                    placeholder="Enter pulse"
-                  />
+                <NumberInput
+                  label="Pulse"
+                  {...form.getInputProps('pulse')}
+                  placeholder="Enter pulse"
+                />
 
-                  <NumberInput
-                    label="Systolic"
-                    {...form.getInputProps('systolic')}
-                    placeholder="Enter systolic"
-                  />
+                <NumberInput
+                  label="Systolic"
+                  {...form.getInputProps('systolic')}
+                  placeholder="Enter systolic"
+                />
 
-                  <NumberInput
-                    label="Diastolic"
-                    {...form.getInputProps('diastolic')}
-                    placeholder="Enter diastolic"
-                  />
+                <NumberInput
+                  label="Diastolic"
+                  {...form.getInputProps('diastolic')}
+                  placeholder="Enter diastolic"
+                />
 
-                </Stack>
-              </Box>
-            </ScrollArea>
+              </Stack>
+            </Box>
           </Stepper.Step>
 
           <Stepper.Step description="1 Hr" label="Semi-Vitals">
-            <ScrollArea style={{ height: 350 }}>
-              <Box className={classes.box}>
-                <Stack
-                  spacing="md"
-                  justify="center"
-                  align="stretch"
-                  sx={{
-                    minHeight: 300,
-                    padding: '0 20px'
-                  }}
-                >
-                  <Textarea
-                    label="Drugs"
-                    {...form.getInputProps('drugs')}
-                    placeholder="Enter drugs"
-                  />
-                  <Select
-                    label="Liquor"
-                    {...form.getInputProps('liquor')}
-                    data={liquorOptions}
-                    placeholder="Select liquor"
-                  />
+            <Box className={classes.box}>
+              <Stack
+                spacing="md"
+                justify="center"
+                align="stretch"
+              >
+                <Textarea
+                  label="Drugs"
+                  {...form.getInputProps('drugs')}
+                  placeholder="Enter drugs"
+                />
+                <Select
+                  label="Liquor"
+                  {...form.getInputProps('liquor')}
+                  data={liquorOptions}
+                  placeholder="Select liquor"
+                />
 
-                  <Select
-                    label="Moulding"
-                    {...form.getInputProps('moulding')}
-                    data={mouldingOptions}
-                    placeholder="Select moulding"
-                  />
-                </Stack>
-              </Box>
-            </ScrollArea>
+                <Select
+                  label="Moulding"
+                  {...form.getInputProps('moulding')}
+                  data={mouldingOptions}
+                  placeholder="Select moulding"
+                />
+              </Stack>
+            </Box>
           </Stepper.Step>
           <Stepper.Step description="4 Hrs" label="Readings">
-            <ScrollArea style={{ height: 350 }}>
-              <Box className={classes.box}>
-                <Stack
-                  spacing="md"
-                  justify="center"
-                  align="stretch"
-                  sx={{
-                    minHeight: 300,
-                    padding: '0 20px'
-                  }}
-                >
-                  <NumberInput
-                    label="Cervix"
-                    {...form.getInputProps('cervix')}
-                    placeholder="Enter cervix"
-                  />
+            <Box className={classes.box}>
+              <Stack
+                spacing="md"
+                justify="center"
+                align="stretch"
+              >
+                <NumberInput
+                  label="Cervix"
+                  {...form.getInputProps('cervix')}
+                  placeholder="Enter cervix"
+                />
 
-                  <NumberInput
-                    label="Descent"
-                    {...form.getInputProps('descent')}
-                    placeholder="Enter descent"
-                  />
-                </Stack>
-              </Box>
-            </ScrollArea>
+                <NumberInput
+                  label="Descent"
+                  {...form.getInputProps('descent')}
+                  placeholder="Enter descent"
+                />
+              </Stack>
+            </Box>
           </Stepper.Step>
           <Stepper.Step description="1 or 4 Hrs" label="Urine">
-            <ScrollArea style={{ height: 350 }}>
-              <Box className={classes.box}>
-                <Stack
-                  spacing="md"
-                  justify="center"
-                  align="stretch"
-                  sx={{
-                    minHeight: 300,
-                    padding: '0 20px'
-                  }}
-                >
+            <Box className={classes.box}>
+              <Stack
+                spacing="md"
+                justify="center"
+                align="stretch"
+              >
 
-                  <Stack spacing="md">
-                    <Title order={3}>Urine</Title>
-                    <Box
-                      shadow="sm"
-                      p={20}
-                      sx={{
-                        borderRadius: 20,
-                        border: '1px solid'
+                <Stack spacing="md">
+                  <Title order={3}>Urine</Title>
+                  <Box
+                    shadow="sm"
+                    p={20}
+                    sx={{
+                      borderRadius: 20,
+                      border: '1px solid'
 
-                      }}
-                    >
-                      <NumberInput
-                        label="Volume"
-                        {...form.getInputProps('urine.volume')}
-                        placeholder="Enter volume"
-                      />
-                      <Center p={20}>
-                        <SimpleGrid
-                          cols={2}
-                          spacing="xl"
-                          verticalSpacing="xl"
-                          breakpoints={[
-                            { maxWidth: 600, cols: 1 },
-                            { maxWidth: 1000, cols: 2 }
-                          ]}
-                        >
-                          {urineFields.map((field) => (
-                            <field.component
-                              key={field.name}
-                              label={field.label}
-                              {...form.getInputProps(`urine.${field.name}`)}
-                              placeholder={`Enter ${field.name}`}
-                              onLabel="+ve"
-                              offLabel="-ve"
-                              size="lg"
-                              labelPosition="left"
-                              description={field.description}
-                            />
-                          ))}
-                        </SimpleGrid>
-                      </Center>
-                    </Box>
-                    <Title order={3}>Oxytocin</Title>
-                    <Box
-                      shadow="sm"
-                      p={20}
-                      sx={{
-                        borderRadius: 20,
-                        border: '1px solid'
+                    }}
+                  >
+                    <NumberInput
+                      label="Volume"
+                      {...form.getInputProps('urine.volume')}
+                      placeholder="Enter volume"
+                    />
+                    <Center p={20}>
+                      <SimpleGrid
+                        cols={2}
+                        spacing="xl"
+                        verticalSpacing="xl"
+                        breakpoints={[
+                          { maxWidth: 500, cols: 1 },
+                          { maxWidth: 1000, cols: 2 }
+                        ]}
+                      >
+                        {urineFields.map((field) => (
+                          <field.component
+                            key={field.name}
+                            label={field.label}
+                            {...form.getInputProps(`urine.${field.name}`)}
+                            placeholder={`Enter ${field.name}`}
+                            onLabel="+ve"
+                            offLabel="-ve"
+                            size="lg"
+                            labelPosition="left"
+                            description={field.description}
+                          />
+                        ))}
+                      </SimpleGrid>
+                    </Center>
+                  </Box>
+                  <Title order={3}>Oxytocin</Title>
+                  <Box
+                    shadow="sm"
+                    p={20}
+                    sx={{
+                      borderRadius: 20,
+                      border: '1px solid'
 
-                      }}
+                    }}
+                  >
+                    <Stack
+                      spacing="md"
+                      justify="center"
+                      align="stretch"
                     >
                       <NumberInput
                         label="Dose"
@@ -403,19 +381,28 @@ export function CronForm() {
                         {...form.getInputProps('oxytocin.drops')}
                         placeholder="Enter drops"
                       />
-                    </Box>
-                  </Stack>
+
+                    </Stack>
+                  </Box>
                 </Stack>
-              </Box>
-            </ScrollArea>
+              </Stack>
+            </Box>
           </Stepper.Step>
         </Stepper>
 
-        <Group position="center" my="md">
+        <Group
+          position="center"
+          my="md"
+          style={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+          }}
+        >
           <Button
             color="blue"
-            my={10}
-            w={100}
+            style={{ flex: 1 }}
             disabled={active === 0}
             onClick={() => {
               if (active > 0) {
@@ -427,8 +414,7 @@ export function CronForm() {
           </Button>
 
           <Button
-            my={10}
-            w={100}
+            style={{ flex: 1 }}
             disabled={active === 5}
             onClick={() => {
               if (active < 4) {

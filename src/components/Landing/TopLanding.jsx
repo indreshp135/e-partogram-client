@@ -87,10 +87,10 @@ export function TopLanding() {
             <Title className={classes.title}>
               Empowering Safe Deliveries with
               {' '}
-              <span className={classes.highlight}>E-Partogram</span>
+              <span className={classes.highlight}>ePartogram</span>
             </Title>
             <Text color="dimmed" mt="md">
-              Experience the Future of Maternal Care with E-Partogram - the
+              Experience the Future of Maternal Care with ePartogram - the
               Digital Solution for Better Birth Outcomes.
             </Text>
             <Group mt={30}>
