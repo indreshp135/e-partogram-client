@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
+import { AppShell, useMantineTheme } from '@mantine/core';
 import { HeaderNav } from '../components/Header';
 import { Faq } from '../components/Landing/FAQ';
 import { FeaturesGrid } from '../components/Landing/Features';
@@ -17,12 +18,34 @@ export function LandingPageContainer() {
     });
     if (notifyToken) { localStorage.setItem('notifyToken', notifyToken); }
   }, [location]);
+  const theme = useMantineTheme();
   return (
-    <div>
-      <HeaderNav opened={false} setOpened={() => {}} />
-      <TopLanding />
-      <FeaturesGrid />
-      <Faq />
-    </div>
+    <AppShell
+      styles={{
+        main: {
+          background: theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[1],
+          height: '100%',
+          '& > *': {
+            height: '100%'
+          }
+        }
+      }}
+      header={
+        <HeaderNav opened={false} setOpened={() => {}} />
+      }
+    >
+      <div style={{
+        height: '100%',
+        '& > *': {
+          height: '100%'
+        }
+      }}
+      >
+        <TopLanding />
+        <FeaturesGrid />
+        <Faq />
+      </div>
+    </AppShell>
+
   );
 }
